@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GymXpress.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,13 +30,16 @@ namespace GymXpress.Controllers
 
         // POST: Compte/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(int role, string courriel, string motPasse)
         {
             try
             {
-                // TODO: Add insert logic here
+                using (Idal dal = new Dal())
+                {
 
-                return RedirectToAction("Index");
+                    dal.CreerCompte(role, courriel, motPasse);
+                    return RedirectToAction("Index");
+                }
             }
             catch
             {
