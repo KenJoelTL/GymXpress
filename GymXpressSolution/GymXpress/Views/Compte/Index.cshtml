@@ -1,0 +1,52 @@
+﻿@model IEnumerable<GymXpress.Models.Compte>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdCompte)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Role)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Courriel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MotPasse)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdCompte)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Role)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Courriel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MotPasse)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id= item.IdCompte/*, nom=item.MotPasse*/ }) |
+            @Html.ActionLink("Details", "Details", new { id = item.IdCompte }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.IdCompte })
+        </td>
+    </tr>
+}
+
+</table>

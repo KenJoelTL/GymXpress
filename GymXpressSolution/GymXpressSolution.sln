@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymXpress", "GymXpress\GymXpress.csproj", "{575B295B-F5DD-4EEA-8AF6-245C76CE1D13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymXpress.Tests", "GymXpress.Tests\GymXpress.Tests.csproj", "{031641B5-61CE-46E7-B9BC-1DA79D6F3CF4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{575B295B-F5DD-4EEA-8AF6-245C76CE1D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{575B295B-F5DD-4EEA-8AF6-245C76CE1D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{575B295B-F5DD-4EEA-8AF6-245C76CE1D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{575B295B-F5DD-4EEA-8AF6-245C76CE1D13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031641B5-61CE-46E7-B9BC-1DA79D6F3CF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031641B5-61CE-46E7-B9BC-1DA79D6F3CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031641B5-61CE-46E7-B9BC-1DA79D6F3CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031641B5-61CE-46E7-B9BC-1DA79D6F3CF4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
