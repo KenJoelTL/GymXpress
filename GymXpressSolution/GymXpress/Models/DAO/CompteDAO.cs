@@ -31,9 +31,9 @@ namespace GymXpress.Models.DAO
                 {
                     comptesListe.Add(new Compte()
                     {
-                        Role = rdr.GetInt32(0),
-                        Courriel = rdr.GetString(1),
-                        MotPasse = rdr.GetString(2)
+                        Role = rdr.GetInt32(1),
+                        Courriel = rdr.GetString(2),
+                        MotPasse = rdr.GetString(3)
                     });
                 }
             }
