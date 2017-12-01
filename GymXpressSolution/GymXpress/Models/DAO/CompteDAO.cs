@@ -31,6 +31,7 @@ namespace GymXpress.Models.DAO
                 {
                     comptesListe.Add(new Compte()
                     {
+                        IdCompte = rdr.GetInt32(0),
                         Role = rdr.GetInt32(1),
                         Courriel = rdr.GetString(2),
                         MotPasse = rdr.GetString(3)
@@ -64,6 +65,31 @@ namespace GymXpress.Models.DAO
                 cmd.Parameters.AddWithValue("@Courriel", compte.Courriel);
                 cmd.Parameters.AddWithValue("@MotPasse", compte.MotPasse);
 
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+
+            }
+
+        }
+
+        public void Update(Compte compte)
+        {
+
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = cnx;
+                cmd.CommandText = "UPDATE compte SET ROLE = @Role, COURRIEL = @Courriel, MOT_PASSE = @MotPasse WHERE ID_COMPTE = @IdCompte";
+                cmd.Prepare();
+
+                cmd.Parameters.AddWithValue("@IdCompte", compte.IdCompte);
+                cmd.Parameters.AddWithValue("@Role", compte.Role);
+                cmd.Parameters.AddWithValue("@Courriel", compte.Courriel);
+                cmd.Parameters.AddWithValue("@MotPasse", compte.MotPasse);
+                
                 cmd.ExecuteNonQuery();
             }
             catch (MySqlException ex)

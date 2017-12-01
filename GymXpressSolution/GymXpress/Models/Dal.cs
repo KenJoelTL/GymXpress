@@ -19,6 +19,11 @@ namespace GymXpress.Models
             bdd.Compte.Add(new Compte { Role = role, Courriel = courriel, MotPasse = motPasse });
         }
 
+        public void ModifierCompte(int id, int role, string courriel, string motPasse)
+        {
+            bdd.Compte.Update(new Compte { IdCompte = id, Role = role, Courriel = courriel, MotPasse = motPasse });
+        }
+
         public List<Compte> ObtenirTousLesComptes()
         {
             return bdd.Compte.ToList();

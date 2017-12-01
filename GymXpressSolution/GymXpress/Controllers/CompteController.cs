@@ -50,6 +50,37 @@ namespace GymXpress.Controllers
             }
         }
 
+        public ActionResult Edit(int? id)
+        {
+            if (id.HasValue)
+            {
+                using (Idal dal = new Dal())
+                {
+                    Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == id.Value);
+                    if (compte == null)
+                        return View("Error");
+                    return View(compte);
+                }
+            }
+            else
+                return HttpNotFound();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, int role, string courriel, string motPasse)
+        {
+            if (!ModelState.IsValid)
+                return View();
+            using (Idal dal = new Dal())
+            {
+                dal.ModifierCompte(id, role, courriel, motPasse);
+                return RedirectToAction("Index");
+            }
+
+        }
+
+
+/*
         // GET: Compte/Edit/5
         public ActionResult Edit(int id, string nom)
         {
@@ -94,5 +125,6 @@ namespace GymXpress.Controllers
                 return View();
             }
         }
+        */
     }
 }
