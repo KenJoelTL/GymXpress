@@ -8,5 +8,6 @@ namespace GymXpress.Models
     interface Idal : IDisposable
     {
         void CreerCompte(int role, string courriel, string motPasse);
+        List<Compte> ObtenirTousLesComptes();
     }
 }

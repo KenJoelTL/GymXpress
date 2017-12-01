@@ -19,6 +19,11 @@ namespace GymXpress.Models
             bdd.Compte.Add(new Compte { Role = role, Courriel = courriel, MotPasse = motPasse });
         }
 
+        public List<Compte> ObtenirTousLesComptes()
+        {
+            return bdd.Compte.ToList();
+        }
+
         public void Dispose()
         {
             bdd.Dispose();
