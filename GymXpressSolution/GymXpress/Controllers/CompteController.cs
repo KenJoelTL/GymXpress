@@ -12,8 +12,11 @@ namespace GymXpress.Controllers
         // GET: Compte
         public ActionResult Index()
         {
-
-            return View();
+            using (Idal dal = new Dal())
+            {
+                List<Compte> listeDesComptes = dal.ObtenirTousLesComptes();
+                return View(listeDesComptes);
+            }
         }
 
         // GET: Compte/Details/5
