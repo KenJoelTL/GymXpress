@@ -9,5 +9,7 @@ namespace GymXpress.Models
     {
         void CreerCompte(int role, string courriel, string motPasse);
         List<Compte> ObtenirTousLesComptes();
+        void ModifierCompte(int id, int role, string courriel, string motPasse);
+     
     }
 }
