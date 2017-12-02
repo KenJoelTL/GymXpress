@@ -114,6 +114,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CompteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlanEntrainementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -121,6 +122,7 @@
     <Compile Include="Models\Compte.cs" />
     <Compile Include="Models\Dal.cs" />
     <Compile Include="Models\DAO\CompteDAO.cs" />
+    <Compile Include="Models\DAO\PlanEntrainementDAO.cs" />
     <Compile Include="Models\DbContext.cs" />
     <Compile Include="Models\Idal.cs" />
     <Compile Include="Models\PlanEntrainement.cs" />
@@ -132,6 +134,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Compte\Edit.cshtml" />
+    <Content Include="Views\PlanEntrainement\Create.cshtml" />
+    <Content Include="Views\PlanEntrainement\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
