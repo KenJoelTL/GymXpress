@@ -8,26 +8,35 @@ namespace GymXpress.Models
 {
     public class BddContext : DbContext
     {
-      
+    //---------------------------------------------
+        // Attributes |
 
         private CompteDAO compte;
+        private PlanEntrainementDAO planEntrainement;
 
+
+    //---------------------------------------------
+        // Constructor |
         public BddContext() : base()
         {
             Compte = new CompteDAO(cnx);
+            PlanEntrainement = new PlanEntrainementDAO(cnx);
         }
 
-        public CompteDAO Compte
-        {
-            get
-            {
-                return compte;
-            }
 
-            set
-            {
-                compte = value;
-            }
+       
+    //---------------------------------------------
+        // Getters | Setters
+
+        public CompteDAO Compte{
+            get{ return compte; }
+            set{ compte = value; }
         }
+
+        public PlanEntrainementDAO PlanEntrainement {
+            get { return planEntrainement; }
+            set { planEntrainement = value; }
+        }
+
     }
 }
