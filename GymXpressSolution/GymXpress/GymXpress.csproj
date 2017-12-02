@@ -123,6 +123,7 @@
     <Compile Include="Models\DAO\CompteDAO.cs" />
     <Compile Include="Models\DbContext.cs" />
     <Compile Include="Models\Idal.cs" />
+    <Compile Include="Models\PlanEntrainement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
