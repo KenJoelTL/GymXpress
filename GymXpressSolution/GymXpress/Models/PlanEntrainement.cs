@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 
 namespace GymXpress.Models {
+
     public class PlanEntrainement {
 
         private int idPlanEntraienement;
@@ -37,4 +38,5 @@ namespace GymXpress.Models {
 
 
     }
+
 }
