@@ -14,6 +14,7 @@ namespace GymXpress.Models
         private CompteDAO compte;
         private PlanEntrainementDAO planEntrainement;
         private DispoDAO dispo;
+        private RendezVousDAO rdv;
 
 
     //---------------------------------------------
@@ -23,6 +24,7 @@ namespace GymXpress.Models
             Compte = new CompteDAO(cnx);
             PlanEntrainement = new PlanEntrainementDAO(cnx);
             Dispo = new DispoDAO(cnx);
+            RDV = new RendezVousDAO(cnx);
         }
 
 
@@ -45,6 +47,14 @@ namespace GymXpress.Models
             get { return dispo; }
             set { dispo = value; }
         }
+
+
+        public RendezVousDAO RDV
+        {
+            get { return rdv; }
+            set { rdv = value; }
+        }
+
 
 
     }
