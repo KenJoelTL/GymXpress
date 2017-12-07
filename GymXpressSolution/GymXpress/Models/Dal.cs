@@ -59,6 +59,22 @@ namespace GymXpress.Models
         public void ModifierPlanEntrainement(int idCompte, int idEntraineur, string nom) {
             bdd.PlanEntrainement.Update(new PlanEntrainement { IdCompte = idCompte, IdEntraineur = idEntraineur, Nom = nom });
         }
+
+    //---------------------------------------------
+        // dispo |
+
+        public void CreerDispo(int idEntraineur, string heureDebut, string heureFin, string date)
+        {
+            bdd.Dispo.Add(new Dispo { IdEntraineur = idEntraineur, HeureDebut = heureDebut, HeureFin = heureFin, Date = date });
+        }
+        public List<Dispo> ObtenirToutesLesDispos()
+        {
+            return bdd.Dispo.ToList(); 
+        }
+        public void ModifierDispo(int idDispo, int idEntraineur, string heureDebut, string heureFin, string date)
+        {
+            bdd.Dispo.Update(new Dispo { IdDispo = idDispo, IdEntraineur = idEntraineur, HeureDebut = heureDebut, HeureFin = heureFin, Date = date });
+        }
     }
 #endregion
 }
