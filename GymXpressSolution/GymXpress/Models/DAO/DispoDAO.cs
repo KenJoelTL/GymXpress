@@ -84,7 +84,7 @@ namespace GymXpress.Models.DAO
             {
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = cnx;
-                cmd.CommandText = "UPDATE compte SET ID_ENTRAINEUR = @IdEntraineur, HEURE_DEBUT= @HeureDebut, HEURE_FIN = @HeureFin, DATE = @Date WHERE ID_DISPO = @IdDispo";
+                cmd.CommandText = "UPDATE dispo SET ID_ENTRAINEUR = @IdEntraineur, HEURE_DEBUT= @HeureDebut, HEURE_FIN = @HeureFin, DATE = @Date WHERE ID_DISPO = @IdDispo";
                 cmd.Prepare();
 
                 cmd.Parameters.AddWithValue("@IdDispo", dispo.IdDispo);
