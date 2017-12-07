@@ -113,6 +113,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CompteController.cs" />
+    <Compile Include="Controllers\DispoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlanEntrainementController.cs" />
     <Compile Include="Global.asax.cs">
@@ -122,10 +123,13 @@
     <Compile Include="Models\Compte.cs" />
     <Compile Include="Models\Dal.cs" />
     <Compile Include="Models\DAO\CompteDAO.cs" />
+    <Compile Include="Models\DAO\DispoDAO.cs" />
     <Compile Include="Models\DAO\PlanEntrainementDAO.cs" />
     <Compile Include="Models\DbContext.cs" />
+    <Compile Include="Models\Dispo.cs" />
     <Compile Include="Models\Idal.cs" />
     <Compile Include="Models\PlanEntrainement.cs" />
+    <Compile Include="Models\RendezVous.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +140,9 @@
     <Content Include="Views\Compte\Edit.cshtml" />
     <Content Include="Views\PlanEntrainement\Create.cshtml" />
     <Content Include="Views\PlanEntrainement\Index.cshtml" />
+    <Content Include="Views\Dispo\Index.cshtml" />
+    <Content Include="Views\Dispo\Create.cshtml" />
+    <Content Include="Views\Dispo\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
