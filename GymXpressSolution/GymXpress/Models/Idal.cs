@@ -12,12 +12,13 @@ namespace GymXpress.Models
         void CreerCompte(int role, string courriel, string motPasse);
         List<Compte> ObtenirTousLesComptes();
         void ModifierCompte(int id, int role, string courriel, string motPasse);
+        void SupprimerCompte(int idCompte);
      
     //---------------------------------------------
-        // PlanEntrainement |
-        void CreerPlanEntrainement(int idCompte, int idEntraineur, string nom);
-        List<PlanEntrainement> ObtenirTousLesPlanEntrainements();
-        void ModifierPlanEntrainement(int idCompte, int idEntraineur, string nom);
-
+        // Plan |
+        void CreerPlan(int idCompte, int idEntraineur, string nom);
+        List<Plan> ObtenirTousLesPlans();
+        void ModifierPlan(int idPlan, int idCompte, int idEntraineur, string nom);
+        void SupprimerPlan(int idPlan);
     }
 }

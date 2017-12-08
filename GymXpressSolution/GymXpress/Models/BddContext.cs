@@ -12,7 +12,7 @@ namespace GymXpress.Models
         // Attributes |
 
         private CompteDAO compte;
-        private PlanEntrainementDAO planEntrainement;
+        private PlanDAO plan;
 
 
     //---------------------------------------------
@@ -20,7 +20,7 @@ namespace GymXpress.Models
         public BddContext() : base()
         {
             Compte = new CompteDAO(cnx);
-            PlanEntrainement = new PlanEntrainementDAO(cnx);
+            Plan = new PlanDAO(cnx);
         }
 
 
@@ -33,9 +33,9 @@ namespace GymXpress.Models
             set{ compte = value; }
         }
 
-        public PlanEntrainementDAO PlanEntrainement {
-            get { return planEntrainement; }
-            set { planEntrainement = value; }
+        public PlanDAO Plan {
+            get { return plan; }
+            set { plan = value; }
         }
 
     }
