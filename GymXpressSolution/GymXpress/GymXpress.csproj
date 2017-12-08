@@ -114,8 +114,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CompteController.cs" />
+    <Compile Include="Controllers\DispoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlanController.cs" />
+    <Compile Include="Controllers\RendezVousController.cs" />
+
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -124,9 +127,14 @@
     <Compile Include="Models\Dal.cs" />
     <Compile Include="Models\DAO\CompteDAO.cs" />
     <Compile Include="Models\DAO\PlanDAO.cs" />
+    <Compile Include="Models\DAO\DispoDAO.cs" />
+    <Compile Include="Models\DAO\RendezVousDAO.cs" />
     <Compile Include="Models\DbContext.cs" />
+    <Compile Include="Models\Dispo.cs" />
     <Compile Include="Models\Idal.cs" />
+
     <Compile Include="Models\Plan.cs" />
+    <Compile Include="Models\RendezVous.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +152,12 @@
     </Content>
     <Content Include="Views\Compte\Delete.cshtml" />
     <Content Include="Views\Compte\Login.cshtml" />
+    <Content Include="Views\Dispo\Index.cshtml" />
+    <Content Include="Views\Dispo\Create.cshtml" />
+    <Content Include="Views\Dispo\Edit.cshtml" />
+    <Content Include="Views\RendezVous\Index.cshtml" />
+    <Content Include="Views\RendezVous\Edit.cshtml" />
+    <Content Include="Views\RendezVous\View.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
