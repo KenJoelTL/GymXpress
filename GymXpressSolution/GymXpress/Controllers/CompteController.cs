@@ -79,31 +79,6 @@ namespace GymXpress.Controllers
 
         }
 
-
-/*
-        // GET: Compte/Edit/5
-        public ActionResult Edit(int id, string nom)
-        {
-            Console.WriteLine("=========================================== "+nom);
-            return View();
-        }
-
-        // POST: Compte/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: Compte/Delete/5
         public ActionResult Delete(int id)
         {
@@ -117,14 +92,63 @@ namespace GymXpress.Controllers
             try
             {
                 // TODO: Add delete logic here
+                using (Idal dal = new Dal())
+                {
+                    dal.SupprimerCompte(id);
+                    return RedirectToAction("Index");
+                }
 
-                return RedirectToAction("Index");
             }
             catch
             {
                 return View();
             }
         }
-        */
+        
+        // GET: Login
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost, AllowAnonymous]
+        public ActionResult Login(string courriel, string motPasse)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                using (Idal dal = new Dal())
+                {
+                    
+                    Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == courriel && c.MotPasse == motPasse);
+                    if (compte == null) {
+                        return RedirectToAction("Index");                        
+                    }
+                    else
+                    {
+                        return View();
+                    }
+                }
+
+            }
+            catch
+            {
+                return View();
+            }
+
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult Test()
+        {
+
+            return View("Error");
+            
+        }
+
+
+
     }
 }

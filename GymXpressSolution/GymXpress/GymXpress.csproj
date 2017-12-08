@@ -111,10 +111,11 @@
     <Content Include="Views\Compte\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CompteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PlanEntrainementController.cs" />
+    <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -122,10 +123,10 @@
     <Compile Include="Models\Compte.cs" />
     <Compile Include="Models\Dal.cs" />
     <Compile Include="Models\DAO\CompteDAO.cs" />
-    <Compile Include="Models\DAO\PlanEntrainementDAO.cs" />
+    <Compile Include="Models\DAO\PlanDAO.cs" />
     <Compile Include="Models\DbContext.cs" />
     <Compile Include="Models\Idal.cs" />
-    <Compile Include="Models\PlanEntrainement.cs" />
+    <Compile Include="Models\Plan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -134,8 +135,15 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Compte\Edit.cshtml" />
-    <Content Include="Views\PlanEntrainement\Create.cshtml" />
-    <Content Include="Views\PlanEntrainement\Index.cshtml" />
+    <Content Include="Views\Plan\Create.cshtml" />
+    <Content Include="Views\Plan\Index.cshtml" />
+    <Content Include="Views\Plan\Delete.cshtml" />
+    <Content Include="Views\Plan\Edit.cshtml" />
+    <Content Include="Views\Shared\_Error.cshtml">
+      <BrowseToURL>~/Shared/Error</BrowseToURL>
+    </Content>
+    <Content Include="Views\Compte\Delete.cshtml" />
+    <Content Include="Views\Compte\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
