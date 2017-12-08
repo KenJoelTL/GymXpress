@@ -7,39 +7,39 @@ using System.Web.Mvc;
 
 namespace GymXpress.Controllers
 {
-    public class PlanEntrainementController : Controller
+    public class PlanController : Controller
     {
-        // GET: PlanEntrainement
+        // GET: Plan
         public ActionResult Index()
         {
             using (Idal dal = new Dal()) {
-                List<PlanEntrainement> listeDesPlans = dal.ObtenirTousLesPlanEntrainements();
+                List<Plan> listeDesPlans = dal.ObtenirTousLesPlans();
                 return View(listeDesPlans);
             }
             
         }
 
-        // GET: PlanEntrainement/Details/5
+        // GET: Plan/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: PlanEntrainement/Create
+        // GET: Plan/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: PlanEntrainement/Create
+        // POST: Plan/Create
         [HttpPost]
-        public ActionResult Create(PlanEntrainement planEntrainement)
+        public ActionResult Create(Plan plan)
         {
             try
             {
                 using (Idal dal = new Dal()) {
 
-                    dal.CreerPlanEntrainement(planEntrainement.IdCompte, planEntrainement.IdEntraineur, planEntrainement.Nom);
+                    dal.CreerPlan(plan.IdCompte, plan.IdEntraineur, plan.Nom);
                     return RedirectToAction("Index");
                 }
             }
@@ -49,21 +49,29 @@ namespace GymXpress.Controllers
             }
         }
 
-        // GET: PlanEntrainement/Edit/5
+        // GET: Plan/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: PlanEntrainement/Edit/5
+        // POST: Plan/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                using (Idal dal = new Dal())
+                {
+                    Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
+                    if (plan == null)
+                        return View("Error");
+                    else {
+                        dal.ModifierPlan(id, Convert.ToInt32(collection["IdCompte"]),
+                            Convert.ToInt32(collection["IdEntraineur"]), Convert.ToString(collection["Nom"]));
+                        return RedirectToAction("Index");
+                    }
+                }
             }
             catch
             {
@@ -71,21 +79,27 @@ namespace GymXpress.Controllers
             }
         }
 
-        // GET: PlanEntrainement/Delete/5
+        // GET: Plan/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: PlanEntrainement/Delete/5
+        // POST: Plan/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                using (Idal dal = new Dal())
+                {
+                    Plan plan= dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
+                    if (plan == null)
+                        return View("Error");
+                    else
+                        dal.SupprimerPlan(plan.IdPlan);
+                    return RedirectToAction("Index");
+                }
             }
             catch
             {

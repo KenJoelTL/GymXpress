@@ -97,7 +97,30 @@ namespace GymXpress.Models.DAO
                 Console.WriteLine("Error: {0}", ex.ToString());
 
             }
-
         }
+
+
+        public void Remove(Compte compte)
+        {
+
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = cnx;
+                cmd.CommandText = "DELETE FROM compte WHERE ID_COMPTE = @IdCompte";
+                cmd.Prepare();
+
+                cmd.Parameters.AddWithValue("@IdCompte", compte.IdCompte);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+
+            }
+        }
+
+
     }
 }
