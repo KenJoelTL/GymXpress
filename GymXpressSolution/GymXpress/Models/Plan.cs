@@ -5,16 +5,16 @@ using System.Web;
 
 namespace GymXpress.Models {
 
-    public class PlanEntrainement {
+    public class Plan {
 
-        private int idPlanEntraienement;
+        private int idPlan;
         private int idCompte;
         private int idEntraineur;
         private string nom;
 
-        public int IdPlanEntrainement {
-            get { return idPlanEntraienement; }
-            set { idPlanEntraienement = value; }
+        public int IdPlan {
+            get { return idPlan; }
+            set { idPlan = value; }
         }
 
         public int IdCompte {
