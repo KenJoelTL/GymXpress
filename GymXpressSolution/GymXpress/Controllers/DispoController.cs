@@ -55,7 +55,7 @@ namespace GymXpress.Controllers
             {
                 using (Idal dal = new Dal())
                 {
-                    Dispo dispo = dal.ObtenirToutesLesDispos().FirstOrDefault(d->d.IdCompte == id.Value);
+                    Dispo dispo = dal.ObtenirToutesLesDispos().FirstOrDefault(d=>d.IdDispo== id.Value);
                     if (dispo == null)
                         return View("Error");
                     return View(dispo);
