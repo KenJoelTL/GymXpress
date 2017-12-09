@@ -55,7 +55,7 @@ namespace GymXpress.Controllers
             {
                 using (Idal dal = new Dal())
                 {
-                    RendezVous rdv = dal.ObtenirTousLesRDV().FirstOrDefault(r->r.IdRDV == id.Value);
+                    RendezVous rdv = dal.ObtenirTousLesRDV().FirstOrDefault(r=>r.IdRDV == id.Value);
                     if (rdv == null)
                         return View("Error");
                     return View(rdv);
