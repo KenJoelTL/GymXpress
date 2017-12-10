@@ -84,29 +84,18 @@ namespace GymXpress.Models
 
     //---------------------------------------------
         // Rendez vous |
-        void CreerRDV(int idDispo, int idClient, int idEntraineur)
+        public void CreerRDV(int idDispo, int idClient, int idEntraineur)
         {
             bdd.RDV.Add(new RendezVous { IdDispo = idDispo, IdClient = idClient, IdEntraineur = idEntraineur });
         }
-        List<RendezVous> ObtenirTousLesRDV()
+        public List<RendezVous> ObtenirTousLesRDV()
         {
             return bdd.RDV.ToList();
         }
-        void ModifierRDV(int idRDV, int idDispo, int idClient, int idEntraineur)
+        public void ModifierRDV(int idRDV, int idDispo, int idClient, int idEntraineur)
         {
             bdd.RDV.Update(new RendezVous { IdRDV = idRDV, IdDispo = idDispo, IdClient = idClient, IdEntraineur = idEntraineur });
         }
-
-        void Idal.CreerRDV(int idDispo, int idClient, int idEntraineur)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<RendezVous> Idal.ObtenirTousLesRDV()
-        {
-            throw new NotImplementedException();
-        }
-
       
     }
 #endregion
