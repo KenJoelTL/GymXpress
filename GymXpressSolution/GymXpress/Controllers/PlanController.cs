@@ -1,4 +1,5 @@
-﻿using GymXpress.Models;
+﻿using GymXpress.App_Start;
+using GymXpress.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace GymXpress.Controllers
 {
+    [HandleError, AuthorizationConnectionFilter]
     public class PlanController : Controller
     {
         // GET: Plan

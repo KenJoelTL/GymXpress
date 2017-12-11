@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace GymXpress.Controllers
 {
+    [HandleError]
     public class HomeController : Controller
     {
         // GET: Home
