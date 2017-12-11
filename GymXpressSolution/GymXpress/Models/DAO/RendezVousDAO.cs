@@ -35,7 +35,6 @@ namespace GymXpress.Models.DAO
                         IdRDV = rdr.GetInt32(0),
                         IdDispo = rdr.GetInt32(1),
                         IdClient = rdr.GetInt32(2),
-                        IdEntraineur = rdr.GetInt32(3)
                     });
                 }
             }
@@ -59,12 +58,11 @@ namespace GymXpress.Models.DAO
             {
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = cnx;
-                cmd.CommandText = "INSERT INTO rendezvous(ID_DISPO, ID_CLIENT, ID_ENTRAINEUR) VALUES(@IdDispo, @IdClient@, IdEntraineur)";
+                cmd.CommandText = "INSERT INTO rendezvous(ID_DISPO, ID_CLIENT) VALUES(@IdDispo, @IdClient)";
                 cmd.Prepare();
 
                 cmd.Parameters.AddWithValue("@IdDispo", rdv.IdDispo);
                 cmd.Parameters.AddWithValue("@IdClient", rdv.IdClient);
-                cmd.Parameters.AddWithValue("@IdEntraineur", rdv.IdEntraineur);
 
 
                 cmd.ExecuteNonQuery();
@@ -84,13 +82,12 @@ namespace GymXpress.Models.DAO
             {
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = cnx;
-                cmd.CommandText = "UPDATE rendezvous SET ID_DISPO = @IdDispo, ID_CLIENT= @IdClient, ID_ENTRAINEUR= @IdEntraineur, WHERE ID_RENDEZ_VOUS= @IdDispo";
+                cmd.CommandText = "UPDATE rendezvous SET ID_DISPO = @IdDispo, ID_CLIENT= @IdClient, WHERE ID_RENDEZ_VOUS= @IdDispo";
                 cmd.Prepare();
 
                 cmd.Parameters.AddWithValue("@IdRendezVous", rdv.IdRDV);
                 cmd.Parameters.AddWithValue("@IdDispo", rdv.IdDispo);
                 cmd.Parameters.AddWithValue("@IdClient", rdv.IdClient);
-                cmd.Parameters.AddWithValue("@IdEntraineur", rdv.IdEntraineur);
                 
                 cmd.ExecuteNonQuery();
             }

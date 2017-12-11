@@ -31,10 +31,12 @@ namespace GymXpress.Controllers
 
         // POST: RendezVous/Create
         [HttpPost]
-        public ActionResult Create(int idDispo, int idClient, int idEntraineur) {
+
+        public ActionResult Create(int idDispo, int idClient) {
             try {
                 using (Idal dal = new Dal()) {
-                    dal.CreerRDV(idDispo, idClient, idEntraineur);
+                    dal.CreerRDV(idDispo, idClient);
+
                     return RedirectToAction("Index");
                 }
             }
@@ -57,11 +59,13 @@ namespace GymXpress.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, int idDispo, int idClient, int idEntraineur) {
+
+        public ActionResult Edit(int id, int idDispo, int idClient) {
             if (!ModelState.IsValid)
                 return View();
             using (Idal dal = new Dal()) {
-                dal.ModifierRDV(id, idDispo, idClient, idEntraineur);
+                dal.ModifierRDV(id, idDispo, idClient);
+
                 return RedirectToAction("Index");
             }
 

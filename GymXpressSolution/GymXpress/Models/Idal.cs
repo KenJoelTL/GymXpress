@@ -27,9 +27,9 @@ namespace GymXpress.Models
         void ModifierDispo(int idDispo, int idEntraineur, string heureDebut, string heureFin, string date);
     //---------------------------------------------
         // Rendez vous |
-        void CreerRDV(int idDispo, int idClient, int idEntraineur);
+        void CreerRDV(int idDispo, int idClient);
         List<RendezVous> ObtenirTousLesRDV();
-        void ModifierRDV(int idRDV, int idDispo, int idClient, int idEntraineur);
+        void ModifierRDV(int idRDV, int idDispo, int idClient);
 
     }
 }
