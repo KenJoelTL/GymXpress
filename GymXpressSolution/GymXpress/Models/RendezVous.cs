@@ -10,7 +10,6 @@ namespace GymXpress.Models
         private int idRDV;
         private int idDispo;
         private int idClient;
-        private int idEntraineur;
 
         public int IdRDV
         {
@@ -30,11 +29,7 @@ namespace GymXpress.Models
             set { idClient = value; }
         }
 
-        public int IdEntraineur
-        {
-            get { return idEntraineur; }
-            set { idEntraineur = value; }
-        }
+
 
 
 
