@@ -1,4 +1,5 @@
-﻿using GymXpress.Models;
+﻿using GymXpress.App_Start;
+using GymXpress.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,11 @@ using System.Web.Mvc;
 
 namespace GymXpress.Controllers
 {
+    [HandleError]
     public class CompteController : Controller
     {
         // GET: Compte
+        [AuthorizationConnectionFilter]
         public ActionResult Index()
         {
             using (Idal dal = new Dal())
@@ -20,6 +23,7 @@ namespace GymXpress.Controllers
         }
 
         // GET: Compte/Details/5
+        [AuthorizationConnectionFilter]
         public ActionResult Details(int id)
         {
             return View();
@@ -50,6 +54,7 @@ namespace GymXpress.Controllers
             }
         }
 
+        [AuthorizationConnectionFilter]
         public ActionResult Edit(int? id)
         {
             if (id.HasValue)
@@ -66,7 +71,7 @@ namespace GymXpress.Controllers
                 return HttpNotFound();
         }
 
-        [HttpPost]
+        [HttpPost, AuthorizationConnectionFilter]
         public ActionResult Edit(int id, int role, string courriel, string motPasse)
         {
             if (!ModelState.IsValid)
@@ -80,13 +85,14 @@ namespace GymXpress.Controllers
         }
 
         // GET: Compte/Delete/5
+        [AuthorizationConnectionFilter]
         public ActionResult Delete(int id)
         {
             return View();
         }
 
         // POST: Compte/Delete/5
-        [HttpPost]
+        [HttpPost, AuthorizationConnectionFilter]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
@@ -168,7 +174,7 @@ namespace GymXpress.Controllers
         public ActionResult Test()
         {
 
-            return View("Error");
+            return View("_Error");
             
         }
 
