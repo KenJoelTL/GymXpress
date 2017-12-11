@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `compte` (
 --
 
 INSERT INTO `compte` (`ID_COMPTE`, `ROLE`, `COURRIEL`, `MOT_PASSE`) VALUES
-(1, 1, 'admin@mail.com', 'admin');
+(1, 2, 'admin@mail.com', 'admin');
 
 -- --------------------------------------------------------
 
