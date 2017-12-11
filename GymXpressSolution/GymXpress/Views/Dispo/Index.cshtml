@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["connecte"] = 1;
 }
 
 <h2>Index</h2>
@@ -10,7 +11,9 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+
+<input type="date" id="datePicker" onchange="afficherDispoParDate()" data = "@Session["connecte"]">
+<table class="table" id="liste">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.IdDispo)
@@ -29,30 +32,87 @@
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdDispo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdEntraineur)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HeureDebut)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HeureFin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.IdDispo }) |
-            @Html.ActionLink("Details", "Details", new { id = item.IdDispo }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.IdDispo })
-        </td>
-    </tr>
-}
-
 </table>
+
+
+
+
+
+
+
+<script>
+   /* $(document).ready(function () {
+        $("#datePicker").on("change", afficherDispoParDate());
+
+    });
+*/
+
+    function afficherDispoParDate() {
+        var id = 1;
+        var date = $("#datePicker").val();
+        $.ajax({
+            type: "Post",
+            url: "Dispo/ListeDispoParDate/"+id+"?date=" + date,
+            datatype: "json",
+            success: function (Dispo) {
+                var listeParDate = "<tr>";
+                listeParDate += "<th>";
+                listeParDate += "Id dispo";
+                listeParDate += "</th>";
+                listeParDate += "<th>";
+                listeParDate += "Id entraineur";
+                listeParDate += "</th>";
+                listeParDate += "<th>";
+                listeParDate += "Id Heure début";
+                listeParDate += "</th>";
+                listeParDate += "<th>";
+                listeParDate += "Heure fin";
+                listeParDate += "</th>";
+                listeParDate += "<th>";
+                listeParDate += "date";
+                listeParDate += "</th>";
+                listeParDate += "<th>";
+                listeParDate += "</th>";
+                listeParDate += "</tr>";
+                for (i = 0; i < Object.keys(Dispo).length; i++) {
+                    listeParDate += "<tr>";
+                    listeParDate += "<td>";
+                    listeParDate += Dispo[i].IdDispo;
+                    listeParDate += "</td>";
+                    listeParDate += "<td>";
+                    listeParDate += Dispo[i].IdEntraineur;
+                    listeParDate += "</td>";
+                    listeParDate += "<td>";
+                    listeParDate += Dispo[i].HeureDebut;
+                    listeParDate += "</td>";
+                    listeParDate += "<td>";
+                    listeParDate += Dispo[i].HeureFin;
+                    listeParDate += "</td>";
+                    listeParDate += "<td>";
+                    listeParDate += Dispo[i].Date;
+                    listeParDate += "</td>";
+                    listeParDate += "<td>";
+                    listeParDate += "<a href='Edit/" + Dispo[i].IdDispo + "'>Edit | </a>";
+                    listeParDate += "<a href='Delete/" + Dispo[i].IdDispo + "'>Delete</a>";
+                    listeParDate += "</td>";
+                    listeParDate += "<tr>";
+                }
+
+                $("#liste").html(listeParDate);
+
+            }
+
+        });
+
+
+
+    }
+
+
+
+
+
+
+      
+
+</script>
