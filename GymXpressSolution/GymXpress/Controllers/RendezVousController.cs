@@ -1,4 +1,5 @@
-﻿using GymXpress.Models;
+﻿using GymXpress.App_Start;
+using GymXpress.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,55 +8,45 @@ using System.Web.Mvc;
 
 namespace GymXpress.Controllers
 {
-    public class RendezVousController : Controller
-    {
+    [HandleError, AuthorizationConnectionFilter]
+    public class RendezVousController : Controller {
         // GET: RendezVous
-        public ActionResult Index()
-        {
-            using (Idal dal = new Dal())
-            {
+        [AuthorizationConnectionFilter]
+        public ActionResult Index() {
+            using (Idal dal = new Dal()) {
                 List<RendezVous> listeDesRDV = dal.ObtenirTousLesRDV();
                 return View(listeDesRDV);
             }
         }
 
         // GET: RendezVous/Details/5
-        public ActionResult Details(int id)
-        {
+        public ActionResult Details(int id) {
             return View();
         }
 
         // GET:RendezVous/Create
-        public ActionResult Create()
-        {
+        public ActionResult Create() {
             return View();
         }
 
         // POST: RendezVous/Create
         [HttpPost]
-        public ActionResult Create(int idDispo, int idClient, int idEntraineur)
-        {
-            try
-            {
-                using (Idal dal = new Dal())
-                {
+        public ActionResult Create(int idDispo, int idClient, int idEntraineur) {
+            try {
+                using (Idal dal = new Dal()) {
                     dal.CreerRDV(idDispo, idClient, idEntraineur);
                     return RedirectToAction("Index");
                 }
             }
-            catch
-            {
+            catch {
                 return View();
             }
         }
 
-        public ActionResult Edit(int? id)
-        {
-            if (id.HasValue)
-            {
-                using (Idal dal = new Dal())
-                {
-                    RendezVous rdv = dal.ObtenirTousLesRDV().FirstOrDefault(r=>r.IdRDV == id.Value);
+        public ActionResult Edit(int? id) {
+            if (id.HasValue) {
+                using (Idal dal = new Dal()) {
+                    RendezVous rdv = dal.ObtenirTousLesRDV().FirstOrDefault(r => r.IdRDV == id.Value);
                     if (rdv == null)
                         return View("Error");
                     return View(rdv);
@@ -66,12 +57,10 @@ namespace GymXpress.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, int idDispo, int idClient, int idEntraineur)
-        {
+        public ActionResult Edit(int id, int idDispo, int idClient, int idEntraineur) {
             if (!ModelState.IsValid)
                 return View();
-            using (Idal dal = new Dal())
-            {
+            using (Idal dal = new Dal()) {
                 dal.ModifierRDV(id, idDispo, idClient, idEntraineur);
                 return RedirectToAction("Index");
             }
