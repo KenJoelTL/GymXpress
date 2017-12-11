@@ -32,7 +32,7 @@ namespace GymXpress.Controllers
         }
 
         // POST: Compte/Create
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public ActionResult Create(int role, string courriel, string motPasse)
         {
             try
@@ -120,9 +120,10 @@ namespace GymXpress.Controllers
                 // TODO: Add delete logic here
                 using (Idal dal = new Dal())
                 {
-                    
+                    string connecte = "connecte";
                     Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == courriel && c.MotPasse == motPasse);
-                    if (compte == null) {
+                    if ((compte != null) || (HttpContext.Session[connecte] != null)) {
+                        HttpContext.Session[connecte] = compte.IdCompte;
                         return RedirectToAction("Index");                        
                     }
                     else
@@ -138,6 +139,29 @@ namespace GymXpress.Controllers
             }
 
         }
+
+        public ActionResult Logout() {
+            try {
+                using (Idal dal = new Dal()) {
+
+                    string connecte = "connecte";
+                    Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == (int)HttpContext.Session[connecte]);
+                    if (compte != null && HttpContext.Session[connecte] != null) {
+                        HttpContext.Session.Clear();
+                        return RedirectToAction("Index");
+                    }
+                    else {
+                        return View();
+                    }
+                }
+
+            }
+            catch {
+                return View();
+            }
+
+        }
+
 
 
         [AllowAnonymous]
