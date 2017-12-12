@@ -1,4 +1,4 @@
-﻿using GymXpress.App_Start;
+﻿using GymXpress.Filter;
 using GymXpress.Models;
 using System;
 using System.Collections.Generic;
@@ -112,7 +112,7 @@ namespace GymXpress.Controllers
         }
         public JsonResult ListeDispoPourClient(String date)
         {
-            using (Idal dal = new Dal())
+            using (IDal dal = new Dal())
             {
                 List<Dispo> listeDispo = new List<Dispo>(dal.ObtenirToutesLesDispos().Where(d => d.Date == date));
                 return Json(listeDispo);

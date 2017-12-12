@@ -1,4 +1,4 @@
-﻿using GymXpress.App_Start;
+﻿using GymXpress.Filter;
 using GymXpress.Models;
 using System;
 using System.Collections.Generic;
@@ -28,11 +28,11 @@ namespace GymXpress.Controllers
         public ActionResult Create(int idDispo, string idClient) {
             List<Dispo> dispo;
             List<Compte> entraineur;
-            using (Idal dal = new Dal())
+            using (IDal dal = new Dal())
                 {
                  dispo = new List<Dispo>(dal.ObtenirToutesLesDispos().Where(d => d.IdDispo == idDispo));
                 }
-            using (Idal dal = new Dal())
+            using (IDal dal = new Dal())
             {
                 entraineur = new List<Compte>(dal.ObtenirTousLesComptes().Where(c => c.IdCompte== dispo[0].IdEntraineur));
             }

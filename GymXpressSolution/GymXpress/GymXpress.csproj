@@ -112,7 +112,7 @@
     <Content Include="Views\Compte\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\AuthorizationConnectionFilter.cs" />
+    <Compile Include="Filters\AuthorizationConnectionFilter.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CompteController.cs" />
@@ -161,7 +161,6 @@
     <Content Include="Views\RendezVous\Edit.cshtml" />
     <Content Include="Views\RendezVous\Create.cshtml" />
     <Content Include="Views\RendezVous\View.cshtml" />
-
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
