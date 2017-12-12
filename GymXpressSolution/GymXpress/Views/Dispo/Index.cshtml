@@ -12,7 +12,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<input type="date" id="datePicker" onchange="afficherDispoParDate()" data = "@Session["connecte"]">
+<input type="date" id="datePicker" onchange="afficherDispoParDate(@Session["connecte"])">
 <table class="table" id="liste">
     <tr>
         <th>
@@ -47,8 +47,7 @@
     });
 */
 
-    function afficherDispoParDate() {
-        var id = 1;
+    function afficherDispoParDate(id) {
         var date = $("#datePicker").val();
         $.ajax({
             type: "Post",

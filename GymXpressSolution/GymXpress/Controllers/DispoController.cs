@@ -35,13 +35,13 @@ namespace GymXpress.Controllers
 
         // POST: Dispo/Create
         [HttpPost]
-        public ActionResult Create(int idEntraineur, string heureDebut, string heureFin, string date)
+        public ActionResult Create(string heureDebut, string heureFin, string date)
         {
             try
             {
                 using (Idal dal = new Dal())
                 {
-                    dal.CreerDispo(idEntraineur, heureDebut, heureFin, date);
+                    dal.CreerDispo((int)HttpContext.Session["connecte"], heureDebut, heureFin, date);
                     return RedirectToAction("Index");
                 }
             }
