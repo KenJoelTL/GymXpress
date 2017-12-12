@@ -63,7 +63,7 @@ namespace GymXpress.Controllers
                 {
                     Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == id.Value);
                     if (compte == null)
-                        return View("Error");
+                        return View("_Error");
                     return View(compte);
                 }
             }
@@ -123,7 +123,6 @@ namespace GymXpress.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
                 using (Idal dal = new Dal())
                 {
                     string connecte = "connecte";

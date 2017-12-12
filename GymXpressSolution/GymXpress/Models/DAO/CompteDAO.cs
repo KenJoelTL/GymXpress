@@ -34,7 +34,9 @@ namespace GymXpress.Models.DAO
                         IdCompte = rdr.GetInt32(0),
                         Role = rdr.GetInt32(1),
                         Courriel = rdr.GetString(2),
-                        MotPasse = rdr.GetString(3)
+                        MotPasse = rdr.GetString(3),
+                        Prenom = rdr.GetString(4),
+                        Nom = rdr.GetString(5)
                     });
                 }
             }
@@ -58,12 +60,14 @@ namespace GymXpress.Models.DAO
             {
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = cnx;
-                cmd.CommandText = "INSERT INTO compte(ROLE, COURRIEL, MOT_PASSE) VALUES(@Role, @Courriel, @MotPasse)";
+                cmd.CommandText = "INSERT INTO compte(ROLE, COURRIEL, MOT_PASSE, PRENOM, NOM) VALUES(@Role, @Courriel, @MotPasse, @Prenom, @Nom)";
                 cmd.Prepare();
 
                 cmd.Parameters.AddWithValue("@Role", compte.Role);
                 cmd.Parameters.AddWithValue("@Courriel", compte.Courriel);
                 cmd.Parameters.AddWithValue("@MotPasse", compte.MotPasse);
+                cmd.Parameters.AddWithValue("@Prenom", compte.Prenom);
+                cmd.Parameters.AddWithValue("@Nom", compte.Nom);
 
                 cmd.ExecuteNonQuery();
             }
@@ -82,14 +86,16 @@ namespace GymXpress.Models.DAO
             {
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = cnx;
-                cmd.CommandText = "UPDATE compte SET ROLE = @Role, COURRIEL = @Courriel, MOT_PASSE = @MotPasse WHERE ID_COMPTE = @IdCompte";
+                cmd.CommandText = "UPDATE compte SET ROLE = @Role, COURRIEL = @Courriel, MOT_PASSE = @MotPasse, PRENOM = @Prenom, NOM = @Nom WHERE ID_COMPTE = @IdCompte";
                 cmd.Prepare();
 
                 cmd.Parameters.AddWithValue("@IdCompte", compte.IdCompte);
                 cmd.Parameters.AddWithValue("@Role", compte.Role);
                 cmd.Parameters.AddWithValue("@Courriel", compte.Courriel);
                 cmd.Parameters.AddWithValue("@MotPasse", compte.MotPasse);
-                
+                cmd.Parameters.AddWithValue("@Prenom", compte.Prenom);
+                cmd.Parameters.AddWithValue("@Nom", compte.Nom);
+
                 cmd.ExecuteNonQuery();
             }
             catch (MySqlException ex)

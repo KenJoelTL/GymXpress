@@ -42,13 +42,63 @@
         </div>
 
         <div class="form-group">
+            <label class="control-label col-md-2">Confirmation du mot de passe</label>
+            <div class="col-md-10">
+                <input id="confirmationMotPasse" name="confirmationMotPasse" class="form-control" type="password"/>
+                @Html.ValidationMessageFor(model => model.MotPasse, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input id="bValidation" type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
+@if (@Session["connecte"] != null) {
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+} else {
+<div>
+    @Html.ActionLink("Retour à la page de connexion", "Login")
+</div>
+}
+
+<script>
+    $(document).ready(function () {
+        validationChamps("#MotPasse", "#confirmationMotPasse","#bValidation","keyup");
+        //validationChampsUnique();
+    });
+
+    function validationChamps(idChamps,idChampsConfirmation,idValidation,evenement) {
+        $(idValidation).hide();
+
+        $(idChampsConfirmation).on(evenement, function (event) {
+            if ($(this).val() == $(idChamps).val() && $.trim($(this).val()) != '') {
+                $(idValidation).show();
+            } else {
+                $(idValidation).hide();
+            }
+        
+        });
+
+        $(idChamps).on(evenement, function (event) {
+            if ($(this).val() == $(idChampsConfirmation).val() && $.trim($(this).val()) != '') {
+                $(idValidation).show();
+            } else {
+                $(idValidation).hide();
+            }
+
+        });
+    }
+    /*
+    function validationChampsUnique() {
+
+    }*/
+
+
+</script>
+

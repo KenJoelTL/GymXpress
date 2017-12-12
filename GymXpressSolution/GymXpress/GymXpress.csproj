@@ -107,7 +107,6 @@
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Compte\Index.cshtml" />
     <Content Include="Views\Compte\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -141,7 +140,6 @@
     <Content Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Compte\Edit.cshtml" />
     <Content Include="Views\Plan\Create.cshtml" />
     <Content Include="Views\Plan\Index.cshtml" />
     <Content Include="Views\Plan\Delete.cshtml" />
@@ -149,7 +147,6 @@
     <Content Include="Views\Shared\_Error.cshtml">
       <BrowseToURL>~/Shared/Error</BrowseToURL>
     </Content>
-    <Content Include="Views\Compte\Delete.cshtml" />
     <Content Include="Views\Compte\Login.cshtml" />
     <Content Include="Views\Dispo\Index.cshtml" />
     <Content Include="Views\Dispo\Create.cshtml" />
@@ -157,6 +154,9 @@
     <Content Include="Views\RendezVous\Index.cshtml" />
     <Content Include="Views\RendezVous\Edit.cshtml" />
     <Content Include="Views\RendezVous\View.cshtml" />
+    <Content Include="Views\Compte\Details.cshtml" />
+    <Content Include="Views\Compte\Delete.cshtml" />
+    <Content Include="Views\Compte\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

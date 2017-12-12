@@ -16,7 +16,7 @@ namespace GymXpress
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Compte", action = "Login", id = UrlParameter.Optional }
             );
         }
     }

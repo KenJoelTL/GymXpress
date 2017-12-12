@@ -33,16 +33,18 @@ CREATE TABLE IF NOT EXISTS `compte` (
   `ROLE` int(11) NOT NULL DEFAULT '0',
   `COURRIEL` varchar(255) NOT NULL,
   `MOT_PASSE` varchar(11) NOT NULL,
+  `PRENOM` varchar(50) NOT NULL,
+  `NOM` varchar(50) NOT NULL,
   PRIMARY KEY (`ID_COMPTE`),
   UNIQUE KEY `COMPTE_UQ_COURRIEL` (`COURRIEL`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `compte`
 --
 
-INSERT INTO `compte` (`ID_COMPTE`, `ROLE`, `COURRIEL`, `MOT_PASSE`) VALUES
-(1, 2, 'admin@mail.com', 'admin');
+INSERT INTO `compte` (`ID_COMPTE`, `ROLE`, `COURRIEL`, `MOT_PASSE`, `PRENOM`, `NOM`) VALUES
+(1, 2, 'admin@mail.com', 'admin', "Admin", "Admin");
 
 -- --------------------------------------------------------
 
@@ -59,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `dispo` (
   `DATE` varchar(255) NOT NULL,
   PRIMARY KEY (`ID_DISPO`),
   KEY `ID_ENTRAINEUR_FK` (`ID_ENTRAINEUR`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -76,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `plan_entrainement` (
   PRIMARY KEY (`ID_PLAN_ENTRAINEMENT`),
   KEY `ID_COMPTE` (`ID_COMPTE`),
   KEY `ID_ENTRAINEUR` (`ID_ENTRAINEUR`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -92,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `rendezvous` (
   PRIMARY KEY (`ID_RENDEZ_VOUS`),
   KEY `ID_DISPO_FK` (`ID_DISPO`),
   KEY `ID_CLIENT_FK` (`ID_CLIENT`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Constraints for dumped tables
