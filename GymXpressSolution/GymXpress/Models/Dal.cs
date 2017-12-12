@@ -39,8 +39,8 @@ namespace GymXpress.Models
         public List<Compte> ObtenirTousLesComptes() {
             return bdd.Compte.ToList();
         }
-        public void ModifierCompte(int id, int role, string courriel, string motPasse) {
-            bdd.Compte.Update(new Compte { IdCompte = id, Role = role, Courriel = courriel, MotPasse = motPasse });
+        public void ModifierCompte(int id, int role, string courriel, string motPasse, string prenom, string nom) {
+            bdd.Compte.Update(new Compte { IdCompte = id, Role = role, Courriel = courriel, MotPasse = motPasse, Prenom = nom, Nom = nom });
         }
 
         public void SupprimerCompte(int idCompte) {

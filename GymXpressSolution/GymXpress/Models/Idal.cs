@@ -11,7 +11,7 @@ namespace GymXpress.Models
         // Compte |
         void CreerCompte(int role, string courriel, string motPasse, string prenom, string nom);
         List<Compte> ObtenirTousLesComptes();
-        void ModifierCompte(int id, int role, string courriel, string motPasse);
+        void ModifierCompte(int id, int role, string courriel, string motPasse, string prenom, string nom);
         void SupprimerCompte(int idCompte);
      
     //---------------------------------------------
@@ -30,6 +30,5 @@ namespace GymXpress.Models
         void CreerRDV(int idDispo, int idClient);
         List<RendezVous> ObtenirTousLesRDV();
         void ModifierRDV(int idRDV, int idDispo, int idClient);
-
     }
 }

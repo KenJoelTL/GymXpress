@@ -157,6 +157,7 @@
     <Content Include="Views\Compte\Details.cshtml" />
     <Content Include="Views\Compte\Delete.cshtml" />
     <Content Include="Views\Compte\Index.cshtml" />
+    <Content Include="Views\Compte\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
