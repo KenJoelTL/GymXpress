@@ -110,5 +110,13 @@ namespace GymXpress.Controllers
                 return Json(listeDispo);
             }
         }
+        public JsonResult ListeDispoPourClient(String date)
+        {
+            using (Idal dal = new Dal())
+            {
+                List<Dispo> listeDispo = new List<Dispo>(dal.ObtenirToutesLesDispos().Where(d => d.Date == date));
+                return Json(listeDispo);
+            }
+        }
     }
 }

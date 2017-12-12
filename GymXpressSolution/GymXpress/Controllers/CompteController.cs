@@ -127,9 +127,11 @@ namespace GymXpress.Controllers
                 using (Idal dal = new Dal())
                 {
                     string connecte = "connecte";
+                    string role = "role";
                     Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == courriel && c.MotPasse == motPasse);
                     if ((compte != null) || (HttpContext.Session[connecte] != null)) {
                         HttpContext.Session[connecte] = compte.IdCompte;
+                        HttpContext.Session[role] = compte.Role;
                         return RedirectToAction("Index");                        
                     }
                     else
