@@ -104,7 +104,26 @@ namespace GymXpress.Models.DAO
 
         }
 
-      
+        public void Remove(Dispo dispo) {
+
+            try {
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = cnx;
+                cmd.CommandText = "DELETE FROM dispo WHERE ID_DISPO = @IdDispo";
+                cmd.Prepare();
+
+                cmd.Parameters.AddWithValue("@IdDispo", dispo.IdDispo);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex) {
+                Console.WriteLine("Error: {0}", ex.ToString());
+
+            }
+
+        }
+
+
 
     }
 }

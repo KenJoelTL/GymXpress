@@ -81,8 +81,11 @@ namespace GymXpress.Models
         {
             bdd.Dispo.Update(new Dispo { IdDispo = idDispo, IdEntraineur = idEntraineur, HeureDebut = heureDebut, HeureFin = heureFin, Date = date });
         }
+        public void SupprimerDispo(int idDispo) {
+            bdd.Dispo.Remove(new Dispo { IdDispo = idDispo});
+        }
 
-    //---------------------------------------------
+        //---------------------------------------------
         // Rendez vous |
         public void CreerRDV(int idDispo, int idClient)
         {
@@ -96,7 +99,10 @@ namespace GymXpress.Models
         {
             bdd.RDV.Update(new RendezVous { IdRDV = idRDV, IdDispo = idDispo, IdClient = idClient });
         }
-      
+        public void SupprimerRDV(int idRDV) {
+            bdd.RDV.Remove(new RendezVous { IdRDV = idRDV});
+        }
+
     }
 #endregion
 
