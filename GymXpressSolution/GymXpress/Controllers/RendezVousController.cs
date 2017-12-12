@@ -25,7 +25,15 @@ namespace GymXpress.Controllers
         }
 
         // GET:RendezVous/Create
-        public ActionResult Create() {
+        public ActionResult Create(int idDispo, string idClient) {
+            List<Dispo> dispo;
+            using (Idal dal = new Dal())
+                {
+                 dispo = new List<Dispo>(dal.ObtenirToutesLesDispos().Where(d => d.IdDispo == idDispo));
+                }
+            ViewBag.Dispo = dispo[0];
+            ViewBag.IdDispo = idDispo;
+            ViewBag.IdClient = idClient;
             return View();
         }
 

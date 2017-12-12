@@ -104,7 +104,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Compte\Index.cshtml" />
@@ -156,12 +158,13 @@
     <Content Include="Views\Dispo\Edit.cshtml" />
     <Content Include="Views\RendezVous\Index.cshtml" />
     <Content Include="Views\RendezVous\Edit.cshtml" />
-    <Content Include="Views\RendezVous\View.cshtml" />
+    <Content Include="Views\RendezVous\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

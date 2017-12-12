@@ -5,46 +5,68 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Creation</h2>
+<h2>Confirmation</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>RendezVous</h4>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <h3>Veuillez confirmer votre inscription à cette seance :</h3>
+
+
         <div class="form-group">
-            @Html.LabelFor(model => model.IdRDV, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdRDV, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdRDV, "", new { @class = "text-danger" })
+            <label class="control-label col-sm-2" for="entraineur">Entraineur:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="entraineur" value="@ViewBag.Dispo.IdEntraineur" disabled>
             </div>
         </div>
 
         <div class="form-group">
+            <label class="control-label col-sm-2" for="heureDebut">Heure de début:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="heureDebut" value="@ViewBag.Dispo.HeureDebut" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="heureFin">Heure de fin:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="heureFin" value="@ViewBag.Dispo.HeureFin" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="date">Date:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="date" value="@ViewBag.Dispo.Date " disabled>
+            </div>
+        </div>
+
+
+        <div class="form-group" hidden>
             @Html.LabelFor(model => model.IdDispo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IdDispo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.IdDispo)
                 @Html.ValidationMessageFor(model => model.IdDispo, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" hidden>
             @Html.LabelFor(model => model.IdClient, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IdClient, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.IdClient)
                 @Html.ValidationMessageFor(model => model.IdClient, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Confirmer" class="btn btn-default" />
             </div>
         </div>
-    </div>
+</div>
 }
 
 <div>
