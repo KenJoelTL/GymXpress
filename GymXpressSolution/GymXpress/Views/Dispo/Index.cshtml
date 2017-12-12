@@ -3,7 +3,9 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    Session["connecte"] = 1;
+    var roleUtilisateur = (int)@Session["role"];
+    var id = (int)@Session["connecte"];
+
 }
 
 <h2>Index</h2>
@@ -12,7 +14,8 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<input type="date" id="datePicker" onchange="afficherDispoParDate()" data = "@Session["connecte"]">
+@if(roleUtilisateur >= 1) { 
+<input type="date" id="datePicker" onchange="afficherDispoParDate(id)">
 <table class="table" id="liste">
     <tr>
         <th>
@@ -33,6 +36,31 @@
         <th></th>
     </tr>
 </table>
+}
+@if (roleUtilisateur < 1)
+{
+    <input type="date" id="datePicker" onchange="afficherDispoPourClient(id)">
+    <table class="table" id="liste">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDispo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEntraineur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeureDebut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeureFin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th></th>
+        </tr>
+    </table>
+}
 
 
 
@@ -41,14 +69,8 @@
 
 
 <script>
-   /* $(document).ready(function () {
-        $("#datePicker").on("change", afficherDispoParDate());
 
-    });
-*/
-
-    function afficherDispoParDate() {
-        var id = 1;
+    function afficherDispoParDate(id) {
         var date = $("#datePicker").val();
         $.ajax({
             type: "Post",
@@ -97,15 +119,64 @@
                     listeParDate += "</td>";
                     listeParDate += "<tr>";
                 }
-
                 $("#liste").html(listeParDate);
-
             }
-
         });
+    }
 
-
-
+    function afficherDispoPourClient(_id) {
+        var date = $("#datePicker").val();
+        id = _id;
+        $.ajax({
+            type: "Post",
+            url: "Dispo/ListeDispoPourClient/?date=" + date,
+            datatype: "json",
+            success: function (Dispo) {
+                var listeParDate = "<tr>";
+                listeParDate += "<th>";
+                listeParDate += "Id dispo";
+                listeParDate += "</th>";
+                listeParDate += "<th>";
+                listeParDate += "Id entraineur";
+                listeParDate += "</th>";
+                listeParDate += "<th>";
+                listeParDate += "Id Heure début";
+                listeParDate += "</th>";
+                listeParDate += "<th>";
+                listeParDate += "Heure fin";
+                listeParDate += "</th>";
+                listeParDate += "<th>";
+                listeParDate += "date";
+                listeParDate += "</th>";
+                listeParDate += "<th>";
+                listeParDate += "</th>";
+                listeParDate += "</tr>";
+                for (i = 0; i < Object.keys(Dispo).length; i++) {
+                    listeParDate += "<tr>";
+                    listeParDate += "<td>";
+                    listeParDate += Dispo[i].IdDispo;
+                    listeParDate += "</td>";
+                    listeParDate += "<td>";
+                    listeParDate += Dispo[i].IdEntraineur;
+                    listeParDate += "</td>";
+                    listeParDate += "<td>";
+                    listeParDate += Dispo[i].HeureDebut;
+                    listeParDate += "</td>";
+                    listeParDate += "<td>";
+                    listeParDate += Dispo[i].HeureFin;
+                    listeParDate += "</td>";
+                    listeParDate += "<td>";
+                    listeParDate += Dispo[i].Date;
+                    listeParDate += "</td>";
+                    listeParDate += "<td>";
+                    listeParDate += "<a href='RendezVous/Create/?idDispo=" + Dispo[i].IdDispo + "&idClient=@Session["connecte"]'> S'inscrire | </a>";
+                    
+                    listeParDate += "</td>";
+                    listeParDate += "<tr>";
+                }
+                $("#liste").html(listeParDate);
+            }
+        });
     }
 
 

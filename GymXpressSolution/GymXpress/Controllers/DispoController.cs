@@ -35,13 +35,13 @@ namespace GymXpress.Controllers
 
         // POST: Dispo/Create
         [HttpPost]
-        public ActionResult Create(int idEntraineur, string heureDebut, string heureFin, string date)
+        public ActionResult Create(string heureDebut, string heureFin, string date)
         {
             try
             {
                 using (IDal dal = new Dal())
                 {
-                    dal.CreerDispo(idEntraineur, heureDebut, heureFin, date);
+                    dal.CreerDispo((int)HttpContext.Session["connecte"], heureDebut, heureFin, date);
                     return RedirectToAction("Index");
                 }
             }
@@ -107,6 +107,14 @@ namespace GymXpress.Controllers
             using (IDal dal = new Dal())
             {
                 List<Dispo> listeDispo = new List<Dispo>(dal.ObtenirToutesLesDispos().Where(d => d.Date == date).Where(d => d.IdEntraineur == Id));
+                return Json(listeDispo);
+            }
+        }
+        public JsonResult ListeDispoPourClient(String date)
+        {
+            using (Idal dal = new Dal())
+            {
+                List<Dispo> listeDispo = new List<Dispo>(dal.ObtenirToutesLesDispos().Where(d => d.Date == date));
                 return Json(listeDispo);
             }
         }
