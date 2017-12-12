@@ -10,13 +10,13 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Compte</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         
-
+        @if (@Session["role"]!=null && (int)@Session["role"] >= 2) {
         <div class="form-group">
             @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -24,11 +24,28 @@
                 @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
             </div>
         </div>
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Prenom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Prenom, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Prenom, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Courriel, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Courriel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Courriel, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
                 @Html.ValidationMessageFor(model => model.Courriel, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -36,7 +53,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MotPasse, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MotPasse, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.MotPasse, new { htmlAttributes = new { @class = "form-control", @type="password" } })
                 @Html.ValidationMessageFor(model => model.MotPasse, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,7 +61,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Confirmation du mot de passe</label>
             <div class="col-md-10">
-                <input id="confirmationMotPasse" name="confirmationMotPasse" class="form-control" type="password"/>
+                <input id="ConfirmationMotPasse" name="ConfirmationMotPasse" class="form-control" type="password" />
                 @Html.ValidationMessageFor(model => model.MotPasse, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -56,24 +73,23 @@
         </div>
     </div>
 }
-
 @if (@Session["connecte"] != null) {
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-} else {
-<div>
-    @Html.ActionLink("Retour à la page de connexion", "Login")
-</div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 }
-
+else {
+    <div>
+        @Html.ActionLink("Retour à la page de connexion", "Login")
+    </div>
+}
 <script>
     $(document).ready(function () {
-        validationChamps("#MotPasse", "#confirmationMotPasse","#bValidation","keyup");
+        validationChamps("#MotPasse", "#ConfirmationMotPasse", "#bValidation", "keyup");
         //validationChampsUnique();
     });
 
-    function validationChamps(idChamps,idChampsConfirmation,idValidation,evenement) {
+    function validationChamps(idChamps, idChampsConfirmation, idValidation, evenement) {
         $(idValidation).hide();
 
         $(idChampsConfirmation).on(evenement, function (event) {
@@ -82,7 +98,7 @@
             } else {
                 $(idValidation).hide();
             }
-        
+
         });
 
         $(idChamps).on(evenement, function (event) {
@@ -101,4 +117,3 @@
 
 
 </script>
-

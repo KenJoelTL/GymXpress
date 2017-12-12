@@ -21,13 +21,16 @@
                 </button>
                 @Html.ActionLink("GymXpress", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
+            @if (Session["connecte"] !=null) {
             <div class="navbar-collapse collapse">
+                @if(Session["role"] != null && (int)Session["role"] >= 2) {
                 <ul class="nav navbar-nav">
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="AfficherCompte">
                         @Html.ActionLink("Compte", "Index", "Compte", new { area = "" }, new { @class = "navbar-brand" })
                             <i class="fa fa-fw fa-table"></i>
                     </li>
                 </ul>
+                }
                 <ul class="nav navbar-nav">
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="AfficherPlan">
                         @Html.ActionLink("Plan d'entrainement", "Index", "Plan", new { area = "" }, new { @class = "navbar-brand" })
@@ -47,6 +50,7 @@
                     </li>
                 </ul>
             </div>
+            }
         </div>
     </div>
 

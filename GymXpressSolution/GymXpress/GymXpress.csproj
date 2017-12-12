@@ -130,7 +130,7 @@
     <Compile Include="Models\DAO\RendezVousDAO.cs" />
     <Compile Include="Models\DbContext.cs" />
     <Compile Include="Models\Dispo.cs" />
-    <Compile Include="Models\Idal.cs" />
+    <Compile Include="Models\IDal.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\RendezVous.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

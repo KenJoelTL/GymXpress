@@ -5,11 +5,11 @@ using System.Web;
 
 namespace GymXpress.Models
 {
-    interface Idal : IDisposable {
+    interface IDal : IDisposable {
 
     //---------------------------------------------
         // Compte |
-        void CreerCompte(int role, string courriel, string motPasse);
+        void CreerCompte(int role, string courriel, string motPasse, string prenom, string nom);
         List<Compte> ObtenirTousLesComptes();
         void ModifierCompte(int id, int role, string courriel, string motPasse);
         void SupprimerCompte(int idCompte);
