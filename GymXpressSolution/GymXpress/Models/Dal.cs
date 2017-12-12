@@ -5,7 +5,7 @@ using System.Web;
 
 namespace GymXpress.Models
 {
-    public class Dal : Idal
+    public class Dal : IDal
     {
     //---------------------------------------------
         // Attributes |
@@ -31,16 +31,16 @@ namespace GymXpress.Models
         
     //---------------------------------------------
         // Compte |
-        public void CreerCompte(int role, string courriel, string motPasse)
+        public void CreerCompte(int role, string courriel, string motPasse, string prenom, string nom)
         {
-            bdd.Compte.Add(new Compte { Role = role, Courriel = courriel, MotPasse = motPasse });
+            bdd.Compte.Add(new Compte { Role = role, Courriel = courriel, MotPasse = motPasse, Prenom = nom, Nom = nom });
         }
 
         public List<Compte> ObtenirTousLesComptes() {
             return bdd.Compte.ToList();
         }
-        public void ModifierCompte(int id, int role, string courriel, string motPasse) {
-            bdd.Compte.Update(new Compte { IdCompte = id, Role = role, Courriel = courriel, MotPasse = motPasse });
+        public void ModifierCompte(int id, int role, string courriel, string motPasse, string prenom, string nom) {
+            bdd.Compte.Update(new Compte { IdCompte = id, Role = role, Courriel = courriel, MotPasse = motPasse, Prenom = nom, Nom = nom });
         }
 
         public void SupprimerCompte(int idCompte) {

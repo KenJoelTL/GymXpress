@@ -15,7 +15,7 @@ namespace GymXpress.Controllers
         [AuthorizationConnectionFilter]
         public ActionResult Index()
         {
-            using (Idal dal = new Dal())
+            using (IDal dal = new Dal())
             {
                 List<Compte> listeDesComptes = dal.ObtenirTousLesComptes();
                 return View(listeDesComptes);
@@ -37,15 +37,24 @@ namespace GymXpress.Controllers
 
         // POST: Compte/Create
         [HttpPost, AllowAnonymous]
-        public ActionResult Create(int role, string courriel, string motPasse)
+        public ActionResult Create(int? role, string courriel, string motPasse, string confirmationMotPasse, string prenom, string nom)
         {
             try
             {
-                using (Idal dal = new Dal())
+                using (IDal dal = new Dal())
                 {
-
-                    dal.CreerCompte(role, courriel, motPasse);
-                    return RedirectToAction("Index");
+                    Compte compte = dal.ObtenirTousLesComptes().SingleOrDefault(c => c.Courriel == courriel);
+                    if (compte == null) {
+                        dal.CreerCompte(role?? 0, courriel, motPasse, prenom, nom);
+                        if(!role.HasValue && HttpContext.Session["connecte"] != null && HttpContext.Session["role"] != null && (int)HttpContext.Session["role"] >= 2)
+                            return RedirectToAction("Login");
+                        else {
+                            return RedirectToAction("Index");
+                        }
+                    }
+                    else {
+                        return View();
+                    }
                 }
             }
             catch
@@ -59,11 +68,11 @@ namespace GymXpress.Controllers
         {
             if (id.HasValue)
             {
-                using (Idal dal = new Dal())
+                using (IDal dal = new Dal())
                 {
                     Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == id.Value);
                     if (compte == null)
-                        return View("Error");
+                        return View("_Error");
                     return View(compte);
                 }
             }
@@ -72,13 +81,15 @@ namespace GymXpress.Controllers
         }
 
         [HttpPost, AuthorizationConnectionFilter]
-        public ActionResult Edit(int id, int role, string courriel, string motPasse)
+        public ActionResult Edit(int id, int role, string courriel, string motPasse, string prenom, string nom)
         {
             if (!ModelState.IsValid)
                 return View();
-            using (Idal dal = new Dal())
+            using (IDal dal = new Dal())
             {
-                dal.ModifierCompte(id, role, courriel, motPasse);
+                Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == id);
+                if (compte == null)
+                    dal.ModifierCompte(id, role, courriel, motPasse, prenom, nom);
                 return RedirectToAction("Index");
             }
 
@@ -98,7 +109,7 @@ namespace GymXpress.Controllers
             try
             {
                 // TODO: Add delete logic here
-                using (Idal dal = new Dal())
+                using (IDal dal = new Dal())
                 {
                     dal.SupprimerCompte(id);
                     return RedirectToAction("Index");
@@ -123,16 +134,15 @@ namespace GymXpress.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-                using (Idal dal = new Dal())
+                using (IDal dal = new Dal())
                 {
                     string connecte = "connecte";
                     string role = "role";
-                    Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == courriel && c.MotPasse == motPasse);
+                    Compte compte = dal.ObtenirTousLesComptes().SingleOrDefault(c => c.Courriel == courriel && c.MotPasse == motPasse);
                     if ((compte != null) || (HttpContext.Session[connecte] != null)) {
                         HttpContext.Session[connecte] = compte.IdCompte;
                         HttpContext.Session[role] = compte.Role;
-                        return RedirectToAction("Index");                        
+                        return RedirectToAction("Index","Home");                        
                     }
                     else
                     {
@@ -150,13 +160,13 @@ namespace GymXpress.Controllers
 
         public ActionResult Logout() {
             try {
-                using (Idal dal = new Dal()) {
+                using (IDal dal = new Dal()) {
 
                     string connecte = "connecte";
-                    Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == (int)HttpContext.Session[connecte]);
+                    Compte compte = dal.ObtenirTousLesComptes().SingleOrDefault(c => c.IdCompte == (int)HttpContext.Session[connecte]);
                     if (compte != null && HttpContext.Session[connecte] != null) {
                         HttpContext.Session.Clear();
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Login");
                     }
                     else {
                         return View();
@@ -170,14 +180,9 @@ namespace GymXpress.Controllers
 
         }
 
-
-
-        [AllowAnonymous]
         public ActionResult Test()
         {
-
-            return View("_Error");
-            
+            return View("_Error");   
         }
 
 

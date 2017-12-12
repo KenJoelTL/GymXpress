@@ -109,7 +109,6 @@
     </Content>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Compte\Index.cshtml" />
     <Content Include="Views\Compte\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -133,7 +132,7 @@
     <Compile Include="Models\DAO\RendezVousDAO.cs" />
     <Compile Include="Models\DbContext.cs" />
     <Compile Include="Models\Dispo.cs" />
-    <Compile Include="Models\Idal.cs" />
+    <Compile Include="Models\IDal.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\RendezVous.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -143,7 +142,6 @@
     <Content Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Compte\Edit.cshtml" />
     <Content Include="Views\Plan\Create.cshtml" />
     <Content Include="Views\Plan\Index.cshtml" />
     <Content Include="Views\Plan\Delete.cshtml" />
@@ -151,14 +149,19 @@
     <Content Include="Views\Shared\_Error.cshtml">
       <BrowseToURL>~/Shared/Error</BrowseToURL>
     </Content>
-    <Content Include="Views\Compte\Delete.cshtml" />
     <Content Include="Views\Compte\Login.cshtml" />
+    <Content Include="Views\Compte\Details.cshtml" />
+    <Content Include="Views\Compte\Delete.cshtml" />
+    <Content Include="Views\Compte\Index.cshtml" />
+    <Content Include="Views\Compte\Edit.cshtml" />
     <Content Include="Views\Dispo\Index.cshtml" />
     <Content Include="Views\Dispo\Create.cshtml" />
     <Content Include="Views\Dispo\Edit.cshtml" />
     <Content Include="Views\RendezVous\Index.cshtml" />
     <Content Include="Views\RendezVous\Edit.cshtml" />
     <Content Include="Views\RendezVous\Create.cshtml" />
+    <Content Include="Views\RendezVous\View.cshtml" />
+
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

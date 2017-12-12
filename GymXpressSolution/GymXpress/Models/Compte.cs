@@ -11,33 +11,40 @@ namespace GymXpress.Models
         private int role;
         private string courriel;
         private string motPasse;
+        private string prenom;
+        private string nom;
 
-        public int IdCompte
-        {
+
+        public int IdCompte {
             get { return idCompte; }
             set { idCompte = value; }
         }
 
-        public int Role
-        {
+        public int Role {
             get { return role; }
             set { role = value; }
         }        
 
-        public string Courriel
-        {
+        public string Courriel {
             get { return courriel; }
             set { courriel = value; }
         }
         
-        public string MotPasse
-        {
+        public string MotPasse {
             get { return motPasse; }
             set { motPasse = value; }
         }
 
-        
+        public string Prenom {
+            get { return prenom; }
+            set { prenom = value; }
+        }
 
+        public string Nom {
+            get { return nom; }
+            set { nom = value; }
+        }
+        
 
     }
 }

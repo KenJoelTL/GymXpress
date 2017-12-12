@@ -13,7 +13,7 @@ namespace GymXpress.Controllers
         // GET: RendezVous
         [AuthorizationConnectionFilter]
         public ActionResult Index() {
-            using (Idal dal = new Dal()) {
+            using (IDal dal = new Dal()) {
                 List<RendezVous> listeDesRDV = dal.ObtenirTousLesRDV();
                 return View(listeDesRDV);
             }
@@ -48,7 +48,7 @@ namespace GymXpress.Controllers
 
         public ActionResult Create(int idDispo, int idClient) {
             try {
-                using (Idal dal = new Dal()) {
+                using (IDal dal = new Dal()) {
                     dal.CreerRDV(idDispo, idClient);
 
                     return RedirectToAction("Index");
@@ -61,7 +61,7 @@ namespace GymXpress.Controllers
 
         public ActionResult Edit(int? id) {
             if (id.HasValue) {
-                using (Idal dal = new Dal()) {
+                using (IDal dal = new Dal()) {
                     RendezVous rdv = dal.ObtenirTousLesRDV().FirstOrDefault(r => r.IdRDV == id.Value);
                     if (rdv == null)
                         return View("Error");
@@ -77,7 +77,7 @@ namespace GymXpress.Controllers
         public ActionResult Edit(int id, int idDispo, int idClient) {
             if (!ModelState.IsValid)
                 return View();
-            using (Idal dal = new Dal()) {
+            using (IDal dal = new Dal()) {
                 dal.ModifierRDV(id, idDispo, idClient);
 
                 return RedirectToAction("Index");

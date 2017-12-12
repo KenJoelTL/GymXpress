@@ -14,7 +14,7 @@ namespace GymXpress.Controllers
         // GET: Dispo
         public ActionResult Index()
         {
-            using (Idal dal = new Dal())
+            using (IDal dal = new Dal())
             {
                 List<Dispo> listeDesDispos = dal.ObtenirToutesLesDispos();
                 return View(listeDesDispos);
@@ -39,7 +39,7 @@ namespace GymXpress.Controllers
         {
             try
             {
-                using (Idal dal = new Dal())
+                using (IDal dal = new Dal())
                 {
                     dal.CreerDispo((int)HttpContext.Session["connecte"], heureDebut, heureFin, date);
                     return RedirectToAction("Index");
@@ -55,7 +55,7 @@ namespace GymXpress.Controllers
         {
             if (id.HasValue)
             {
-                using (Idal dal = new Dal())
+                using (IDal dal = new Dal())
                 {
                     Dispo dispo = dal.ObtenirToutesLesDispos().FirstOrDefault(d=>d.IdDispo== id.Value);
                     if (dispo == null)
@@ -72,7 +72,7 @@ namespace GymXpress.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
-            using (Idal dal = new Dal())
+            using (IDal dal = new Dal())
             {
                 dal.ModifierDispo(id, idEntraineur, heureDebut, heureFin, date);
                 return RedirectToAction("Index");
@@ -104,7 +104,7 @@ namespace GymXpress.Controllers
 
         public JsonResult ListeDispoParDate(int Id, String date)
         {
-            using (Idal dal = new Dal())
+            using (IDal dal = new Dal())
             {
                 List<Dispo> listeDispo = new List<Dispo>(dal.ObtenirToutesLesDispos().Where(d => d.Date == date).Where(d => d.IdEntraineur == Id));
                 return Json(listeDispo);

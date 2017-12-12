@@ -14,7 +14,7 @@ namespace GymXpress.Controllers
         // GET: Plan
         public ActionResult Index()
         {
-            using (Idal dal = new Dal()) {
+            using (IDal dal = new Dal()) {
                 List<Plan> listeDesPlans = dal.ObtenirTousLesPlans();
                 return View(listeDesPlans);
             }
@@ -39,7 +39,7 @@ namespace GymXpress.Controllers
         {
             try
             {
-                using (Idal dal = new Dal()) {
+                using (IDal dal = new Dal()) {
 
                     dal.CreerPlan(plan.IdCompte, plan.IdEntraineur, plan.Nom);
                     return RedirectToAction("Index");
@@ -63,7 +63,7 @@ namespace GymXpress.Controllers
         {
             try
             {
-                using (Idal dal = new Dal())
+                using (IDal dal = new Dal())
                 {
                     Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
                     if (plan == null)
@@ -93,7 +93,7 @@ namespace GymXpress.Controllers
         {
             try
             {
-                using (Idal dal = new Dal())
+                using (IDal dal = new Dal())
                 {
                     Plan plan= dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
                     if (plan == null)

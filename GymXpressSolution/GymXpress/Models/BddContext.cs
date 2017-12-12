@@ -32,7 +32,7 @@ namespace GymXpress.Models
     //---------------------------------------------
         // Getters | Setters
 
-        public CompteDAO Compte{
+        public CompteDAO Compte {
             get{ return compte; }
             set{ compte = value; }
         }
