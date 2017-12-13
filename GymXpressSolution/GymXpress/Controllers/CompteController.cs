@@ -126,6 +126,10 @@ namespace GymXpress.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
+            string connecte = "connecte";
+            if (HttpContext.Session[connecte] != null) {
+                return RedirectToAction("Index","Home");
+            }
             return View();
         }
 

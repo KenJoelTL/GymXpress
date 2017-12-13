@@ -82,17 +82,36 @@ namespace GymXpress.Models.DAO
             {
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = cnx;
-                cmd.CommandText = "UPDATE rendezvous SET ID_DISPO = @IdDispo, ID_CLIENT= @IdClient, WHERE ID_RENDEZ_VOUS= @IdDispo";
+                cmd.CommandText = "UPDATE rendezvous SET ID_DISPO = @IdDispo, ID_CLIENT= @IdClient WHERE ID_RENDEZ_VOUS= @IdRendezVous";
                 cmd.Prepare();
 
-                cmd.Parameters.AddWithValue("@IdRendezVous", rdv.IdRDV);
                 cmd.Parameters.AddWithValue("@IdDispo", rdv.IdDispo);
                 cmd.Parameters.AddWithValue("@IdClient", rdv.IdClient);
+                cmd.Parameters.AddWithValue("@IdRendezVous", rdv.IdRDV);
                 
                 cmd.ExecuteNonQuery();
             }
             catch (MySqlException ex)
             {
+                Console.WriteLine("Error: {0}", ex.ToString());
+
+            }
+
+        }
+
+        public void Remove(RendezVous rdv) {
+
+            try {
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = cnx;
+                cmd.CommandText = "DELETE FROM rendezvous WHERE ID_RENDEZ_VOUS = @IdRendezVous";
+                cmd.Prepare();
+
+                cmd.Parameters.AddWithValue("@IdRendezVous", rdv.IdRDV);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex) {
                 Console.WriteLine("Error: {0}", ex.ToString());
 
             }
