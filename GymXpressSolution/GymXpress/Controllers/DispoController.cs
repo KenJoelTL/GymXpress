@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace GymXpress.Controllers
 {
-    [HandleError, AuthorizationConnectionFilter]
+    [AuthorizationConnectionFilter]
     public class DispoController : Controller
     {
         // GET: Dispo

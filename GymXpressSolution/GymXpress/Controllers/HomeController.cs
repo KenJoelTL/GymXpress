@@ -14,6 +14,7 @@ namespace GymXpress.Controllers
         public ActionResult Index()
         {
             return View();
+            
         }
 
         // GET: Home/Details/5
