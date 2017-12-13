@@ -78,9 +78,12 @@ namespace GymXpress.Controllers
             if (!ModelState.IsValid)
                 return View();
             using (IDal dal = new Dal()) {
-                dal.ModifierRDV(id, idDispo, idClient);
-
-                return RedirectToAction("Index");
+                RendezVous rdv = dal.ObtenirTousLesRDV().SingleOrDefault(r => r.IdRDV == id);
+                if (rdv != null) {
+                    dal.ModifierRDV(id, idDispo, idClient);
+                    return RedirectToAction("Index");
+                }
+                return View();
             }
 
         }
@@ -97,9 +100,14 @@ namespace GymXpress.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                using (IDal dal = new Dal()) {
+                    RendezVous rdv = dal.ObtenirTousLesRDV().SingleOrDefault(r => r.IdRDV == id);
+                    if (rdv != null) {
+                        dal.SupprimerRDV(id);
+                        return RedirectToAction("Index");
+                    }
+                    return View();
+                }
             }
             catch
             {

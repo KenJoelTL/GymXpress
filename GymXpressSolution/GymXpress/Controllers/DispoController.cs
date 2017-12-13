@@ -74,8 +74,12 @@ namespace GymXpress.Controllers
                 return View();
             using (IDal dal = new Dal())
             {
-                dal.ModifierDispo(id, idEntraineur, heureDebut, heureFin, date);
-                return RedirectToAction("Index");
+                Dispo dispo = dal.ObtenirToutesLesDispos().SingleOrDefault(d => d.IdDispo == id);
+                if(dispo != null) {
+                    dal.ModifierDispo(id, idEntraineur, heureDebut, heureFin, date);
+                    return RedirectToAction("Index");
+                }
+                return View();
             }
 
         }
@@ -92,9 +96,15 @@ namespace GymXpress.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                using (IDal dal = new Dal()) {
+                    Dispo dispo = dal.ObtenirToutesLesDispos().SingleOrDefault(d => d.IdDispo == id);
+                    if (dispo != null) {
+                        dal.SupprimerDispo(id);
+                        return RedirectToAction("Index");
+                    }
+                    return View();
+                }
 
-                return RedirectToAction("Index");
             }
             catch
             {
