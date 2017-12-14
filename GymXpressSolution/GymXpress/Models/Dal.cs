@@ -40,7 +40,7 @@ namespace GymXpress.Models
             return bdd.Compte.ToList();
         }
         public void ModifierCompte(int id, int role, string courriel, string motPasse, string prenom, string nom) {
-            bdd.Compte.Update(new Compte { IdCompte = id, Role = role, Courriel = courriel, MotPasse = motPasse, Prenom = nom, Nom = nom });
+            bdd.Compte.Update(new Compte { IdCompte = id, Role = role, Courriel = courriel, MotPasse = motPasse, Prenom = prenom, Nom = nom });
         }
 
         public void SupprimerCompte(int idCompte) {
