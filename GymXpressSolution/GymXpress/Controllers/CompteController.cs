@@ -42,16 +42,18 @@ namespace GymXpress.Controllers
 
         // POST: Compte/Create
         [HttpPost, AllowAnonymous]
-        public ActionResult Create(int? role, string courriel, string motPasse, string confirmationMotPasse, string prenom, string nom)
+        public ActionResult Create(Compte compte, string confirmationMotPasse)
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return View();
                 using (IDal dal = new Dal())
                 {
-                    Compte compte = dal.ObtenirTousLesComptes().SingleOrDefault(c => c.Courriel == courriel);
+                    Compte cpt = dal.ObtenirTousLesComptes().SingleOrDefault(c => c.Courriel == compte.Courriel);
                     if (compte == null) {
-                        dal.CreerCompte(role?? 0, courriel, motPasse, prenom, nom);
-                        if(!role.HasValue && HttpContext.Session["connecte"] != null && HttpContext.Session["role"] != null && (int)HttpContext.Session["role"] >= 2)
+                        dal.CreerCompte(compte.Role, compte.Courriel, compte.MotPasse, compte.Prenom, compte.Nom);
+                        if(HttpContext.Session["connecte"] == null && HttpContext.Session["role"] == null && (int)HttpContext.Session["role"] < 2)
                             return RedirectToAction("Login");
                         else {
                             return RedirectToAction("Index");

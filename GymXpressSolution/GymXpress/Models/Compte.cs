@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -20,26 +22,31 @@ namespace GymXpress.Models
             set { idCompte = value; }
         }
 
+        [Required]
         public int Role {
             get { return role; }
             set { role = value; }
         }        
 
+        [Required]
         public string Courriel {
             get { return courriel; }
             set { courriel = value; }
         }
-        
+
+        [DisplayName("Mot de passe"), Required]
         public string MotPasse {
             get { return motPasse; }
             set { motPasse = value; }
         }
 
+        [Required]
         public string Prenom {
             get { return prenom; }
             set { prenom = value; }
         }
 
+        [Required]
         public string Nom {
             get { return nom; }
             set { nom = value; }
