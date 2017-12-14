@@ -15,7 +15,19 @@ namespace GymXpress.Controllers
         public ActionResult Index()
         {
             using (IDal dal = new Dal()) {
-                List<Plan> listeDesPlans = dal.ObtenirTousLesPlans();
+                IEnumerable<Plan> listeDesPlans;
+                int role = (int)Session["role"];
+                switch (role) {
+                    case 1:
+                        listeDesPlans = dal.ObtenirTousLesPlans();
+                        break;
+                    case 2:
+                        listeDesPlans = dal.ObtenirTousLesPlans().Where(p => p.IdEntraineur == (int)Session["connecte"]);
+                        break;
+                    default:
+                        listeDesPlans = dal.ObtenirTousLesPlans().Where(p => p.IdCompte == (int)Session["connecte"]);
+                        break;
+                }
                 return View(listeDesPlans);
             }
             

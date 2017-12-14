@@ -10,43 +10,26 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdPlan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdCompte)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdEntraineur)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nom)
-        </th>
-        <th></th>
-    </tr>
+
+<div class="container">
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdPlan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdCompte)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdEntraineur)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nom)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.IdPlan  }) |
-            @Html.ActionLink("Details", "Details", new {  id=item.IdPlan }) |
-            @Html.ActionLink("Delete", "Delete", new {  id=item.IdPlan })
-        </td>
-    </tr>
-}
 
-</table>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">@item.Nom</div>
+            <!-- le nom mène vers la page de détails, cependant il n'est pas visible. le changer avec les css
+            <div class="panel-heading">@Html.ActionLink(item.Nom, "Details", new {  id=item.IdPlan  })</div>
+            -->    
+            <div class="panel-body">Panel Content</div>
+        </div>
+    </div>
+
+    <!--
+            @Html.DisplayFor(modelItem => item.IdEntraineur)
+            @Html.ActionLink("Edit", "Edit", new {  id=item.IdPlan  }) |
+            @Html.ActionLink("Delete", "Delete", new {  id=item.IdPlan })
+        -->
+        
+}
+</div>
