@@ -26,7 +26,12 @@ namespace GymXpress.Controllers
         [AuthorizationConnectionFilter]
         public ActionResult Details(int id)
         {
-            return View();
+            using (IDal dal = new Dal()) {
+                Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == id);
+                if (compte == null)
+                    return View("_Error");
+                return View(compte);
+            }
         }
 
         // GET: Compte/Create

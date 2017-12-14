@@ -24,7 +24,15 @@ namespace GymXpress.Controllers
         // GET: Plan/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            using (IDal dal = new Dal()) {
+                Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
+                if (plan != null) {
+                    return View(plan);
+                }
+                else {
+                    return RedirectToAction("Index");
+                }
+            }
         }
 
         // GET: Plan/Create
@@ -54,7 +62,15 @@ namespace GymXpress.Controllers
         // GET: Plan/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            using (IDal dal = new Dal()) {
+                Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
+                if (plan != null) {
+                    return View(plan);
+                }
+                else {
+                    return RedirectToAction("Index");
+                }
+            }
         }
 
         // POST: Plan/Edit/5
@@ -84,7 +100,15 @@ namespace GymXpress.Controllers
         // GET: Plan/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            using (IDal dal = new Dal()) {
+                Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
+                if (plan != null) {
+                  return View(plan);
+                }
+                else {
+                    return RedirectToAction("Index");
+                }
+            }
         }
 
         // POST: Plan/Delete/5
@@ -95,7 +119,7 @@ namespace GymXpress.Controllers
             {
                 using (IDal dal = new Dal())
                 {
-                    Plan plan= dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
+                    Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
                     if (plan == null)
                         return View("Error");
                     else
