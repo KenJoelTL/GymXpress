@@ -50,16 +50,16 @@ namespace GymXpress.Models
 
     //---------------------------------------------
         // Plan |
-        public void CreerPlan(int idCompte, int idEntraineur, string nom) {
-            bdd.Plan.Add(new Plan { IdCompte = idCompte, IdEntraineur = idEntraineur, Nom = nom });
+        public void CreerPlan(int idCompte, int idEntraineur, string nom, string description) {
+            bdd.Plan.Add(new Plan { IdCompte = idCompte, IdEntraineur = idEntraineur, Nom = nom, Description = description });
         }
 
         public List<Plan> ObtenirTousLesPlans() {
             return bdd.Plan.ToList();
         }
 
-        public void ModifierPlan(int idPlan, int idCompte, int idEntraineur, string nom) {
-            bdd.Plan.Update(new Plan { IdPlan = idPlan, IdCompte = idCompte, IdEntraineur = idEntraineur, Nom = nom });
+        public void ModifierPlan(int idPlan, int idCompte, int idEntraineur, string nom, string description) {
+            bdd.Plan.Update(new Plan { IdPlan = idPlan, IdCompte = idCompte, IdEntraineur = idEntraineur, Nom = nom, Description = description });
         }
 
         public void SupprimerPlan(int idPlan) {

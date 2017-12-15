@@ -29,16 +29,13 @@ else {
             <!-- le nom mène vers la page de détails, cependant il n'est pas visible. le changer avec les css
             <div class="panel-heading">@Html.ActionLink(item.Nom, "Details", new { id = item.IdPlan })</div>
             -->    
-            <div class="panel-body">Panel Content</div>
+            <div class="panel-body">@item.Description</div>
+            <div class="panel-footer">
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdPlan }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdPlan })
+            </div>
         </div>
     </div>
-
-    <!--
-            @Html.DisplayFor(modelItem => item.IdEntraineur)
-            @Html.ActionLink("Edit", "Edit", new { id = item.IdPlan }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.IdPlan })
-        -->
-
     }
 }
 </div>
