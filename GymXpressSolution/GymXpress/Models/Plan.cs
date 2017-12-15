@@ -12,6 +12,7 @@ namespace GymXpress.Models {
         private int idCompte;
         private int idEntraineur;
         private string nom;
+        private string description;
 
         public int IdPlan {
             get { return idPlan; }
@@ -32,6 +33,11 @@ namespace GymXpress.Models {
         public string Nom {
             get { return nom; }
             set { nom = value; }
+        }
+
+        public string Description {
+            get { return description; }
+            set { description = value; }
         }
 
 

@@ -28,7 +28,8 @@ namespace GymXpress.Models.DAO {
                         IdPlan = rdr.GetInt32(0),
                         IdCompte = rdr.GetInt32(1),
                         IdEntraineur = rdr.GetInt32(2),
-                        Nom = rdr.GetString(3)
+                        Nom = rdr.GetString(3),
+                        Description = rdr.GetString(4)
                     });
                 }
             }
@@ -48,12 +49,13 @@ namespace GymXpress.Models.DAO {
             try {
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = cnx;
-                cmd.CommandText = "INSERT INTO plan_entrainement(ID_COMPTE, ID_ENTRAINEUR, NOM) VALUES(@IdCompte, @IdEntraineur, @Nom)";
+                cmd.CommandText = "INSERT INTO plan_entrainement(ID_COMPTE, ID_ENTRAINEUR, NOM, DESCRIPTION) VALUES(@IdCompte, @IdEntraineur, @Nom, @Description)";
                 cmd.Prepare();
 
                 cmd.Parameters.AddWithValue("@IdCompte", plan.IdCompte);
                 cmd.Parameters.AddWithValue("@IdEntraineur", plan.IdEntraineur);
                 cmd.Parameters.AddWithValue("@Nom", plan.Nom);
+                cmd.Parameters.AddWithValue("@Description", plan.Description);
 
                 cmd.ExecuteNonQuery();
             }
@@ -69,12 +71,13 @@ namespace GymXpress.Models.DAO {
             try {
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = cnx;
-                cmd.CommandText = "UPDATE plan_entrainement SET NOM = @Nom, ID_COMPTE = @IdCompte, ID_ENTRAINEUR = @IdEntraineur WHERE ID_PLAN_ENTRAINEMENT = @IdPlan";
+                cmd.CommandText = "UPDATE plan_entrainement SET NOM = @Nom, ID_COMPTE = @IdCompte, ID_ENTRAINEUR = @IdEntraineur, DESCRIPTION = @Description WHERE ID_PLAN_ENTRAINEMENT = @IdPlan";
                 cmd.Prepare();
 
                 cmd.Parameters.AddWithValue("@Nom", plan.Nom);
                 cmd.Parameters.AddWithValue("@IdCompte", plan.IdCompte);
                 cmd.Parameters.AddWithValue("@IdEntraineur", plan.IdEntraineur);
+                cmd.Parameters.AddWithValue("@Description", plan.Description);
                 cmd.Parameters.AddWithValue("@IdPlan", plan.IdPlan);
 
                 cmd.ExecuteNonQuery();
@@ -95,10 +98,7 @@ namespace GymXpress.Models.DAO {
                 cmd.Connection = cnx;
                 cmd.CommandText = "DELETE FROM plan_entrainement WHERE ID_PLAN_ENTRAINEMENT = @IdPlan";
                 cmd.Prepare();
-
-                cmd.Parameters.AddWithValue("@Nom", plan.Nom);
-                cmd.Parameters.AddWithValue("@IdCompte", plan.IdCompte);
-                cmd.Parameters.AddWithValue("@IdEntraineur", plan.IdEntraineur);
+                
                 cmd.Parameters.AddWithValue("@IdPlan", plan.IdPlan);
 
                 cmd.ExecuteNonQuery();

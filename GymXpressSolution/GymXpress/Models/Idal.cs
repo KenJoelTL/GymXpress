@@ -16,9 +16,9 @@ namespace GymXpress.Models
      
     //---------------------------------------------
         // Plan |
-        void CreerPlan(int idCompte, int idEntraineur, string nom);
+        void CreerPlan(int idCompte, int idEntraineur, string nom, string description);
         List<Plan> ObtenirTousLesPlans();
-        void ModifierPlan(int idPlan, int idCompte, int idEntraineur, string nom);
+        void ModifierPlan(int idPlan, int idCompte, int idEntraineur, string nom, string description);
         void SupprimerPlan(int idPlan);
     //---------------------------------------------
         // Dispo |

@@ -61,7 +61,7 @@ namespace GymXpress.Controllers
             {
                 using (IDal dal = new Dal()) {
 
-                    dal.CreerPlan(plan.IdCompte, plan.IdEntraineur, plan.Nom);
+                    dal.CreerPlan(plan.IdCompte, plan.IdEntraineur, plan.Nom, plan.Description);
                     return RedirectToAction("Index");
                 }
             }
@@ -98,7 +98,7 @@ namespace GymXpress.Controllers
                         return View("Error");
                     else {
                         dal.ModifierPlan(id, Convert.ToInt32(collection["IdCompte"]),
-                            Convert.ToInt32(collection["IdEntraineur"]), Convert.ToString(collection["Nom"]));
+                            Convert.ToInt32(collection["IdEntraineur"]), Convert.ToString(collection["Nom"]), Convert.ToString(collection["Description"]));
                         return RedirectToAction("Index");
                     }
                 }
