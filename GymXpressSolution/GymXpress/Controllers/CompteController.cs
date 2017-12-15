@@ -11,6 +11,8 @@ namespace GymXpress.Controllers
     [HandleError]
     public class CompteController : Controller
     {
+        const string connecte = "connecte";
+        const string role = "role";
         // GET: Compte
         [AuthorizationConnectionFilter]
         public ActionResult Index()
@@ -53,7 +55,7 @@ namespace GymXpress.Controllers
                     Compte cpt = dal.ObtenirTousLesComptes().SingleOrDefault(c => c.Courriel == compte.Courriel);
                     if (compte == null) {
                         dal.CreerCompte(compte.Role, compte.Courriel, compte.MotPasse, compte.Prenom, compte.Nom);
-                        if(HttpContext.Session["connecte"] == null && HttpContext.Session["role"] == null && (int)HttpContext.Session["role"] < 2)
+                        if(HttpContext.Session[connecte] == null && HttpContext.Session[role] == null && (int)HttpContext.Session[role] < 2)
                             return RedirectToAction("Login");
                         else {
                             return RedirectToAction("Index");
@@ -143,7 +145,6 @@ namespace GymXpress.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            string connecte = "connecte";
             if (HttpContext.Session[connecte] != null) {
                 return RedirectToAction("Index","Home");
             }
@@ -157,8 +158,6 @@ namespace GymXpress.Controllers
             {
                 using (IDal dal = new Dal())
                 {
-                    string connecte = "connecte";
-                    string role = "role";
                     Compte compte = dal.ObtenirTousLesComptes().SingleOrDefault(c => c.Courriel == courriel && c.MotPasse == motPasse);
                     if ((compte != null) || (HttpContext.Session[connecte] != null)) {
                         HttpContext.Session[connecte] = compte.IdCompte;
@@ -183,7 +182,6 @@ namespace GymXpress.Controllers
             try {
                 using (IDal dal = new Dal()) {
 
-                    string connecte = "connecte";
                     Compte compte = dal.ObtenirTousLesComptes().SingleOrDefault(c => c.IdCompte == (int)HttpContext.Session[connecte]);
                     if (compte != null && HttpContext.Session[connecte] != null) {
                         HttpContext.Session.Clear();

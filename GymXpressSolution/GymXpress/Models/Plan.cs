@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -27,6 +28,7 @@ namespace GymXpress.Models {
             set { idEntraineur = value; }
         }
 
+        [Required]
         public string Nom {
             get { return nom; }
             set { nom = value; }

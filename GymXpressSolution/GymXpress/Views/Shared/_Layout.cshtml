@@ -49,6 +49,12 @@
                         <i class="fa fa-fw fa-table"></i>
                     </li>
                 </ul>
+                @if (Session["connecte"] != null){
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Compte/Logout"><span class="glyphicon glyphicon-log-in"></span> Se d&eacute;connecter</a></li>
+                </ul>
+                }
+
             </div>
             }
         </div>

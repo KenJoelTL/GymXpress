@@ -13,16 +13,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.IdCompte)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Role)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Courriel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MotPasse)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Prenom)
@@ -30,28 +21,37 @@
         <th>
             @Html.DisplayNameFor(model => model.Nom)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Role)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
+    var role = "";
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.IdCompte)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Role)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Courriel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MotPasse)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Prenom)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Nom)
+        </td>
+        <td>
+            @switch (item.Role) {
+                case 1:
+                    role = "Entraineur";
+                    break;
+                case 2:
+                    role = "Administrateur";
+                    break;
+                default:
+                    role = "Utilisateur";
+                    break;
+            }
+            @role
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new {  id=item.IdCompte  }) |
