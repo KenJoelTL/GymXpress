@@ -19,10 +19,10 @@ namespace GymXpress.Controllers
                 int role = (int)Session["role"];
                 switch (role) {
                     case 1:
-                        listeDesPlans = dal.ObtenirTousLesPlans();
+                        listeDesPlans = dal.ObtenirTousLesPlans().Where(p => p.IdEntraineur == (int)Session["connecte"]);
                         break;
                     case 2:
-                        listeDesPlans = dal.ObtenirTousLesPlans().Where(p => p.IdEntraineur == (int)Session["connecte"]);
+                        listeDesPlans = dal.ObtenirTousLesPlans();
                         break;
                     default:
                         listeDesPlans = dal.ObtenirTousLesPlans().Where(p => p.IdCompte == (int)Session["connecte"]);

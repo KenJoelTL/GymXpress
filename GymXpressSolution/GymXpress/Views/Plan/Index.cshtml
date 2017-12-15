@@ -1,25 +1,33 @@
 ﻿@model IEnumerable<GymXpress.Models.Plan>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Plan d'entrainement";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
+<h2>@ViewBag.Title</h2>
+@if ((int)Session["role"] >= 1) {
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+}
 
 <div class="container">
-
-@foreach (var item in Model) {
+@if (!Model.Any()) {
+   
+        <h3>
+            Vous n'avez pas encore de plan d'entrainement
+        </h3>
+   
+}
+else {
+    foreach (var item in Model) {
 
     <div class="col-md-3">
         <div class="panel panel-primary">
             <div class="panel-heading">@item.Nom</div>
             <!-- le nom mène vers la page de détails, cependant il n'est pas visible. le changer avec les css
-            <div class="panel-heading">@Html.ActionLink(item.Nom, "Details", new {  id=item.IdPlan  })</div>
+            <div class="panel-heading">@Html.ActionLink(item.Nom, "Details", new { id = item.IdPlan })</div>
             -->    
             <div class="panel-body">Panel Content</div>
         </div>
@@ -27,9 +35,10 @@
 
     <!--
             @Html.DisplayFor(modelItem => item.IdEntraineur)
-            @Html.ActionLink("Edit", "Edit", new {  id=item.IdPlan  }) |
-            @Html.ActionLink("Delete", "Delete", new {  id=item.IdPlan })
+            @Html.ActionLink("Edit", "Edit", new { id = item.IdPlan }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.IdPlan })
         -->
-        
+
+    }
 }
 </div>
