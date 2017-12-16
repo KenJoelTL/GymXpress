@@ -15,7 +15,7 @@
 </p>
 
 @if(roleUtilisateur >= 1) { 
-<input type="date" id="datePicker" onchange="afficherDispoParDate(id)">
+<input type="date" id="datePicker" onchange="afficherDispoParDate(@Session["connecte"])">
 <table class="table" id="liste">
     <tr>
         <th>
@@ -39,7 +39,7 @@
 }
 @if (roleUtilisateur < 1)
 {
-    <input type="date" id="datePicker" onchange="afficherDispoPourClient(id)">
+    <input type="date" id="datePicker" onchange="afficherDispoPourClient(@Session["connecte"])">
     <table class="table" id="liste">
         <tr>
             <th>
