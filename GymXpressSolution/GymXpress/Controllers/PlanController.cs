@@ -38,7 +38,9 @@ namespace GymXpress.Controllers
         {
             using (IDal dal = new Dal()) {
                 Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
+                Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == plan.IdEntraineur);
                 if (plan != null) {
+                    ViewBag.Entraineur = compte;
                     return View(plan);
                 }
                 else {
