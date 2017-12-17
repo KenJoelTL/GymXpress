@@ -10,6 +10,14 @@ namespace GymXpress.Models
         private int idRDV;
         private int idDispo;
         private int idClient;
+        private int idEntraineur;
+
+        public int IdEntraineur
+        {
+            get { return idEntraineur; }
+            set { idEntraineur = value; }
+        }
+
 
         public int IdRDV
         {

@@ -38,6 +38,14 @@
                 @Html.ValidationMessageFor(model => model.IdClient, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdEntraineur, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IdEntraineur, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IdEntraineur, "", new { @class = "text-danger" })
+            </div>
+        </div>
  
 
         <div class="form-group">
