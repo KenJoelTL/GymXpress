@@ -28,9 +28,9 @@ namespace GymXpress.Models
         void SupprimerDispo(int idDispo);
     //---------------------------------------------
         // Rendez vous |
-        void CreerRDV(int idDispo, int idClient);
+        void CreerRDV(int idDispo, int idClient, int idEntraineur);
         List<RendezVous> ObtenirTousLesRDV();
-        void ModifierRDV(int idRDV, int idDispo, int idClient);
+        void ModifierRDV(int idRDV, int idDispo, int idClient, int idEntraineur);
         void SupprimerRDV(int idRDV);
     }
 }

@@ -8,14 +8,29 @@
 
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
+@if (roleUtilisateur > 0)
+{
+<h2>Liste de vos disponibilit&eacute;s</h2>
+}
+else
+{
+    <h2>Prise de rendez-vous</h2>
+}
+@if (roleUtilisateur > 0)
+{
+<p> 
+    @Html.ActionLink("Créer une nouvelle disponibilité", "Create")
 </p>
+}
+else
+{
+    <p>
+        Choisissez une date pour prendre un rendez-vous
+    </p>
+}
 
 @if(roleUtilisateur >= 1) { 
-<input type="date" id="datePicker" onchange="afficherDispoParDate(id)">
+<input type="date" id="datePicker" onchange="afficherDispoParDate(@Session["connecte"])">
 <table class="table" id="liste">
     <tr>
         <th>
@@ -39,7 +54,7 @@
 }
 @if (roleUtilisateur < 1)
 {
-    <input type="date" id="datePicker" onchange="afficherDispoPourClient(id)">
+    <input type="date" id="datePicker" onchange="afficherDispoPourClient(@Session["connecte"])">
     <table class="table" id="liste">
         <tr>
             <th>

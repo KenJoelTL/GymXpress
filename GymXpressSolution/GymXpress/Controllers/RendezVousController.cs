@@ -13,10 +13,25 @@ namespace GymXpress.Controllers
         // GET: RendezVous
         [AuthorizationConnectionFilter]
         public ActionResult Index() {
-            using (IDal dal = new Dal()) {
-                List<RendezVous> listeDesRDV = dal.ObtenirTousLesRDV();
-                return View(listeDesRDV);
+            var id = (int)HttpContext.Session["connecte"];
+            var role = (int)HttpContext.Session["role"];
+            List<RendezVous> listeDesRDV;
+
+            if (role > 0) {
+                using (IDal dal = new Dal()) {
+                    listeDesRDV = new List<RendezVous>( dal.ObtenirTousLesRDV().Where(rdv => rdv.IdEntraineur == id)) ;
+                    
+                }
             }
+            else
+            {
+                using (IDal dal = new Dal())
+                {
+                    listeDesRDV = new List<RendezVous>(dal.ObtenirTousLesRDV().Where(rdv => rdv.IdClient == id));
+
+                }
+            }
+            return View(listeDesRDV);
         }
 
         // GET: RendezVous/Details/5
@@ -40,16 +55,17 @@ namespace GymXpress.Controllers
             ViewBag.Entraineur = entraineur[0];
             ViewBag.IdDispo = idDispo;
             ViewBag.IdClient = idClient;
+            ViewBag.IdEntraineur = entraineur[0].IdCompte;
             return View();
         }
 
         // POST: RendezVous/Create
         [HttpPost]
 
-        public ActionResult Create(int idDispo, int idClient) {
+        public ActionResult Create(int idDispo, int idClient, int idEntraineur) {
             try {
                 using (IDal dal = new Dal()) {
-                    dal.CreerRDV(idDispo, idClient);
+                    dal.CreerRDV(idDispo, idClient, idEntraineur);
 
                     return RedirectToAction("Index");
                 }
@@ -74,13 +90,13 @@ namespace GymXpress.Controllers
 
         [HttpPost]
 
-        public ActionResult Edit(int id, int idDispo, int idClient) {
+        public ActionResult Edit(int id, int idDispo, int idClient, int idEntraineur) {
             if (!ModelState.IsValid)
                 return View();
             using (IDal dal = new Dal()) {
                 RendezVous rdv = dal.ObtenirTousLesRDV().SingleOrDefault(r => r.IdRDV == id);
                 if (rdv != null) {
-                    dal.ModifierRDV(id, idDispo, idClient);
+                    dal.ModifierRDV(id, idDispo, idClient, idEntraineur);
                     return RedirectToAction("Index");
                 }
                 return View();

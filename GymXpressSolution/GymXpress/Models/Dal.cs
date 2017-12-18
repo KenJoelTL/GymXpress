@@ -46,9 +46,13 @@ namespace GymXpress.Models
         public void SupprimerCompte(int idCompte) {
             bdd.Compte.Remove(new Compte { IdCompte = idCompte });
         }
+        public void viderCompte()
+        {
+            bdd.Compte.Clear();
+        }
 
 
-    //---------------------------------------------
+        //---------------------------------------------
         // Plan |
         public void CreerPlan(int idCompte, int idEntraineur, string nom, string description) {
             bdd.Plan.Add(new Plan { IdCompte = idCompte, IdEntraineur = idEntraineur, Nom = nom, Description = description });
@@ -85,19 +89,24 @@ namespace GymXpress.Models
             bdd.Dispo.Remove(new Dispo { IdDispo = idDispo});
         }
 
+        public void viderDispo()
+        {
+            bdd.Dispo.Clear();
+        }
+
         //---------------------------------------------
         // Rendez vous |
-        public void CreerRDV(int idDispo, int idClient)
+        public void CreerRDV(int idDispo, int idClient, int idEntraineur)
         {
-            bdd.RDV.Add(new RendezVous { IdDispo = idDispo, IdClient = idClient });
+            bdd.RDV.Add(new RendezVous { IdDispo = idDispo, IdClient = idClient, IdEntraineur = idEntraineur });
         }
         public List<RendezVous> ObtenirTousLesRDV()
         {
             return bdd.RDV.ToList();
         }
-        public void ModifierRDV(int idRDV, int idDispo, int idClient)
+        public void ModifierRDV(int idRDV, int idDispo, int idClient, int idEntraineur)
         {
-            bdd.RDV.Update(new RendezVous { IdRDV = idRDV, IdDispo = idDispo, IdClient = idClient });
+            bdd.RDV.Update(new RendezVous { IdRDV = idRDV, IdDispo = idDispo, IdClient = idClient, IdEntraineur = idEntraineur });
         }
         public void SupprimerRDV(int idRDV) {
             bdd.RDV.Remove(new RendezVous { IdRDV = idRDV});

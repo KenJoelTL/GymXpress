@@ -123,6 +123,23 @@ namespace GymXpress.Models.DAO
 
         }
 
+        public void Clear()
+        {
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = cnx;
+                cmd.CommandText = "DELETE FROM dispo";
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+
+            }
+        }
+
 
 
     }
