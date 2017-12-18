@@ -1,12 +1,7 @@
-﻿using GymXpress.Filter;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using GymXpress.Filters;
 using System.Web.Mvc;
 
-namespace GymXpress.Controllers
-{
+namespace GymXpress.Controllers {
     [HandleError, AuthorizationConnectionFilter]
     public class HomeController : Controller
     {

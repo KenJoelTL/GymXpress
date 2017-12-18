@@ -7,42 +7,33 @@
 
 <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Voulez-vous vraiment supprimer ce plan?</h3>
 <div>
-    <h4>Plan</h4>
+    <h4>Plan - @Html.DisplayFor(model => model.Nom)</h4>
     <hr />
     <dl class="dl-horizontal">
+
+        @Html.EditorFor(model => model.IdPlan, new { htmlAttributes = new { @type = "hidden" } })
+        @Html.EditorFor(model => model.IdEntraineur, new { htmlAttributes = new { @type = "hidden" } })
+        @Html.EditorFor(model => model.IdCompte, new { htmlAttributes = new { @type = "hidden" } }) 
         <dt>
-            @Html.DisplayNameFor(model => model.IdPlan)
+            Utilisateur
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IdPlan)
+            @Html.DisplayFor(model => model.Utilisateur.Prenom)
+            @Html.DisplayFor(model => model.Utilisateur.Nom)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IdCompte)
+            Entraineur
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IdCompte)
+            @Html.DisplayFor(model => model.Entraineur.Prenom) 
+            @Html.DisplayFor(model => model.Entraineur.Nom)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IdEntraineur)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdEntraineur)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Nom)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nom)
-        </dd>
 
     </dl>
 
@@ -50,8 +41,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Retour à la liste", "Index")
         </div>
     }
 </div>

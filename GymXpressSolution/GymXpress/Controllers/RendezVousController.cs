@@ -1,4 +1,4 @@
-﻿using GymXpress.Filter;
+﻿using GymXpress.Filters;
 using GymXpress.Models;
 using System;
 using System.Collections.Generic;

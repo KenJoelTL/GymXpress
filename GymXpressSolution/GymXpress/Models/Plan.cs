@@ -13,7 +13,9 @@ namespace GymXpress.Models {
         private int idEntraineur;
         private string nom;
         private string description;
-
+        public Compte Entraineur { get; set; }
+        public Compte Utilisateur { get; set; }
+        
         public int IdPlan {
             get { return idPlan; }
             set { idPlan = value; }
@@ -25,8 +27,13 @@ namespace GymXpress.Models {
         }
 
         public int IdEntraineur {
-            get { return idEntraineur; }
-            set { idEntraineur = value; }
+            //obtient le id de l'entraineur courant
+            get {
+                //return Entraineur.IdCompte;
+                return idEntraineur;
+            }
+            //change d'entraineur et non le id de l'entraineur courant
+            set { idEntraineur = value; }       
         }
 
         [Required]
@@ -39,8 +46,6 @@ namespace GymXpress.Models {
             get { return description; }
             set { description = value; }
         }
-
-
 
     }
 

@@ -1,16 +1,13 @@
-﻿using GymXpress.Filter;
+﻿using GymXpress.Filters;
 using GymXpress.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
-namespace GymXpress.Controllers
-{
+namespace GymXpress.Controllers {
     [HandleError, AuthorizationConnectionFilter]
-    public class PlanController : Controller
-    {
+    public class PlanController : Controller {
         // GET: Plan
         public ActionResult Index()
         {
@@ -18,16 +15,20 @@ namespace GymXpress.Controllers
                 IEnumerable<Plan> listeDesPlans;
                 int role = (int)Session["role"];
                 switch (role) {
-                    case 1:
+                    case Compte.ENTRAINEUR:
                         listeDesPlans = dal.ObtenirTousLesPlans().Where(p => p.IdEntraineur == (int)Session["connecte"]);
                         break;
-                    case 2:
+                    case Compte.ADMIN:
                         listeDesPlans = dal.ObtenirTousLesPlans();
                         break;
                     default:
                         listeDesPlans = dal.ObtenirTousLesPlans().Where(p => p.IdCompte == (int)Session["connecte"]);
                         break;
                 }
+                foreach (Plan item in listeDesPlans) {
+                    item.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == item.IdEntraineur); 
+                }
+
                 return View(listeDesPlans);
             }
             
@@ -38,6 +39,8 @@ namespace GymXpress.Controllers
         {
             using (IDal dal = new Dal()) {
                 Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
+                plan.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == plan.IdEntraineur);
+                 
                 if (plan != null) {
                     return View(plan);
                 }
@@ -54,7 +57,7 @@ namespace GymXpress.Controllers
         }
 
         // POST: Plan/Create
-        [HttpPost]
+        [HttpPost, AutorisationEntraineurFilter]
         public ActionResult Create(Plan plan)
         {
             try
@@ -72,11 +75,15 @@ namespace GymXpress.Controllers
         }
 
         // GET: Plan/Edit/5
+        [AutorisationEntraineurFilter]
         public ActionResult Edit(int id)
         {
             using (IDal dal = new Dal()) {
                 Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
                 if (plan != null) {
+                    plan.Utilisateur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == plan.IdCompte);
+                    plan.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == plan.IdEntraineur);
+                    ViewBag.Entraineurs = new SelectList(dal.ObtenirTousLesComptes().Where(c => c.Role == Compte.ENTRAINEUR),"IdCompte","Prenom");
                     return View(plan);
                 }
                 else {
@@ -86,7 +93,7 @@ namespace GymXpress.Controllers
         }
 
         // POST: Plan/Edit/5
-        [HttpPost]
+        [HttpPost, AutorisationEntraineurFilter]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
@@ -94,11 +101,14 @@ namespace GymXpress.Controllers
                 using (IDal dal = new Dal())
                 {
                     Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
+                    Compte entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == Convert.ToString(collection["CourrielEntraineur"]));
+                    Compte utilisateur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == Convert.ToString(collection["CourrielUtilisateur"]));
                     if (plan == null)
-                        return View("Error");
+                        return View("_Error");
+                    else if (entraineur == null || utilisateur == null)
+                        return View();
                     else {
-                        dal.ModifierPlan(id, Convert.ToInt32(collection["IdCompte"]),
-                            Convert.ToInt32(collection["IdEntraineur"]), Convert.ToString(collection["Nom"]), Convert.ToString(collection["Description"]));
+                        dal.ModifierPlan(id, utilisateur.IdCompte, entraineur.IdCompte, Convert.ToString(collection["Nom"]), Convert.ToString(collection["Description"]));
                         return RedirectToAction("Index");
                     }
                 }
@@ -110,12 +120,17 @@ namespace GymXpress.Controllers
         }
 
         // GET: Plan/Delete/5
+        [AutorisationEntraineurFilter]
         public ActionResult Delete(int id)
         {
             using (IDal dal = new Dal()) {
                 Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
+                Compte utilisateur = dal.ObtenirTousLesComptes().FirstOrDefault(u => u.IdCompte == plan.IdCompte);
+                Compte entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(e => e.IdCompte == plan.IdEntraineur);
                 if (plan != null) {
-                  return View(plan);
+                    plan.Entraineur = entraineur;
+                    plan.Utilisateur = utilisateur;
+                    return View(plan);
                 }
                 else {
                     return RedirectToAction("Index");
@@ -124,7 +139,7 @@ namespace GymXpress.Controllers
         }
 
         // POST: Plan/Delete/5
-        [HttpPost]
+        [HttpPost, AutorisationEntraineurFilter]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
@@ -132,10 +147,10 @@ namespace GymXpress.Controllers
                 using (IDal dal = new Dal())
                 {
                     Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
-                    if (plan == null)
-                        return View("Error");
-                    else
+                    if (plan != null)
                         dal.SupprimerPlan(plan.IdPlan);
+                    else
+                        View("_Erreur");
                     return RedirectToAction("Index");
                 }
             }
