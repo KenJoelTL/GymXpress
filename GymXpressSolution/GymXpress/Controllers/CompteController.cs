@@ -50,9 +50,9 @@ namespace GymXpress.Controllers {
                 using (IDal dal = new Dal())
                 {
                     Compte cpt = dal.ObtenirTousLesComptes().SingleOrDefault(c => c.Courriel == compte.Courriel);
-                    if (compte == null) {
+                    if (cpt == null) {
                         dal.CreerCompte(compte.Role, compte.Courriel, compte.MotPasse, compte.Prenom, compte.Nom);
-                        if(HttpContext.Session[connecte] == null && HttpContext.Session[role] == null && (int)HttpContext.Session[role] < 2)
+                        if((HttpContext.Session[connecte] == null && HttpContext.Session[role] == null) || (int)HttpContext.Session[role] < Compte.ADMIN)
                             return RedirectToAction("Login");
                         else {
                             return RedirectToAction("Index");

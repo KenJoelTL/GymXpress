@@ -33,7 +33,7 @@ namespace GymXpress.Models
         // Compte |
         public void CreerCompte(int role, string courriel, string motPasse, string prenom, string nom)
         {
-            bdd.Compte.Add(new Compte { Role = role, Courriel = courriel, MotPasse = motPasse, Prenom = nom, Nom = nom });
+            bdd.Compte.Add(new Compte { Role = role, Courriel = courriel, MotPasse = motPasse, Prenom = prenom, Nom = nom });
         }
 
         public List<Compte> ObtenirTousLesComptes() {
