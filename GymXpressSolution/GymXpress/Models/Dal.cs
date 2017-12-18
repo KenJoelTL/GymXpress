@@ -46,9 +46,13 @@ namespace GymXpress.Models
         public void SupprimerCompte(int idCompte) {
             bdd.Compte.Remove(new Compte { IdCompte = idCompte });
         }
+        public void viderCompte()
+        {
+            bdd.Compte.Clear();
+        }
 
 
-    //---------------------------------------------
+        //---------------------------------------------
         // Plan |
         public void CreerPlan(int idCompte, int idEntraineur, string nom, string description) {
             bdd.Plan.Add(new Plan { IdCompte = idCompte, IdEntraineur = idEntraineur, Nom = nom, Description = description });
@@ -83,6 +87,11 @@ namespace GymXpress.Models
         }
         public void SupprimerDispo(int idDispo) {
             bdd.Dispo.Remove(new Dispo { IdDispo = idDispo});
+        }
+
+        public void viderDispo()
+        {
+            bdd.Dispo.Clear();
         }
 
         //---------------------------------------------
