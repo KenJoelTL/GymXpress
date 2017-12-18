@@ -1,16 +1,13 @@
-﻿using GymXpress.Filter;
+﻿using GymXpress.Filters;
 using GymXpress.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
-namespace GymXpress.Controllers
-{
+namespace GymXpress.Controllers {
     [HandleError, AuthorizationConnectionFilter]
-    public class PlanController : Controller
-    {
+    public class PlanController : Controller {
         // GET: Plan
         public ActionResult Index()
         {
@@ -18,10 +15,10 @@ namespace GymXpress.Controllers
                 IEnumerable<Plan> listeDesPlans;
                 int role = (int)Session["role"];
                 switch (role) {
-                    case 1:
+                    case Compte.ENTRAINEUR:
                         listeDesPlans = dal.ObtenirTousLesPlans().Where(p => p.IdEntraineur == (int)Session["connecte"]);
                         break;
-                    case 2:
+                    case Compte.ADMIN:
                         listeDesPlans = dal.ObtenirTousLesPlans();
                         break;
                     default:
@@ -60,7 +57,7 @@ namespace GymXpress.Controllers
         }
 
         // POST: Plan/Create
-        [HttpPost]
+        [HttpPost, AutorisationEntraineurFilter]
         public ActionResult Create(Plan plan)
         {
             try
@@ -78,6 +75,7 @@ namespace GymXpress.Controllers
         }
 
         // GET: Plan/Edit/5
+        [AutorisationEntraineurFilter]
         public ActionResult Edit(int id)
         {
             using (IDal dal = new Dal()) {
@@ -95,7 +93,7 @@ namespace GymXpress.Controllers
         }
 
         // POST: Plan/Edit/5
-        [HttpPost]
+        [HttpPost, AutorisationEntraineurFilter]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
@@ -122,12 +120,17 @@ namespace GymXpress.Controllers
         }
 
         // GET: Plan/Delete/5
+        [AutorisationEntraineurFilter]
         public ActionResult Delete(int id)
         {
             using (IDal dal = new Dal()) {
                 Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
+                Compte utilisateur = dal.ObtenirTousLesComptes().FirstOrDefault(u => u.IdCompte == plan.IdCompte);
+                Compte entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(e => e.IdCompte == plan.IdEntraineur);
                 if (plan != null) {
-                  return View(plan);
+                    plan.Entraineur = entraineur;
+                    plan.Utilisateur = utilisateur;
+                    return View(plan);
                 }
                 else {
                     return RedirectToAction("Index");
@@ -136,7 +139,7 @@ namespace GymXpress.Controllers
         }
 
         // POST: Plan/Delete/5
-        [HttpPost]
+        [HttpPost, AutorisationEntraineurFilter]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
@@ -144,10 +147,10 @@ namespace GymXpress.Controllers
                 using (IDal dal = new Dal())
                 {
                     Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
-                    if (plan == null)
-                        return View("_Error");
-                    else
+                    if (plan != null)
                         dal.SupprimerPlan(plan.IdPlan);
+                    else
+                        View("_Erreur");
                     return RedirectToAction("Index");
                 }
             }

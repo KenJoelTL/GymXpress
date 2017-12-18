@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace GymXpress.Filter {
+namespace GymXpress.Filters {
     public class AuthorizationConnectionFilter : ActionFilterAttribute {
 
         public override void OnActionExecuting(ActionExecutingContext filterContext) {

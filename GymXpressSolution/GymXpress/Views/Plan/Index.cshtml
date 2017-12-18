@@ -6,7 +6,7 @@
 }
 
 <h2>@ViewBag.Title</h2>
-@if ((int)Session["role"] >= 1) {
+@if ((int)Session["role"] >= GymXpress.Models.Compte.ENTRAINEUR) {
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>

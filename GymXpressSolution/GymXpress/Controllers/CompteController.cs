@@ -1,20 +1,17 @@
-﻿using GymXpress.Filter;
+﻿using GymXpress.Filters;
 using GymXpress.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
-namespace GymXpress.Controllers
-{
+namespace GymXpress.Controllers {
     [HandleError]
     public class CompteController : Controller
     {
         const string connecte = "connecte";
         const string role = "role";
         // GET: Compte
-        [AuthorizationConnectionFilter]
+        [AuthorizationConnectionFilter, AutorisationAdminFilter]
         public ActionResult Index()
         {
             using (IDal dal = new Dal())
@@ -25,7 +22,7 @@ namespace GymXpress.Controllers
         }
 
         // GET: Compte/Details/5
-        [AuthorizationConnectionFilter]
+        [AuthorizationConnectionFilter, AutorisationAdminFilter]
         public ActionResult Details(int id)
         {
             using (IDal dal = new Dal()) {
@@ -105,7 +102,7 @@ namespace GymXpress.Controllers
         }
 
         // GET: Compte/Delete/5
-        [AuthorizationConnectionFilter]
+        [AuthorizationConnectionFilter, AutorisationAdminFilter]
         public ActionResult Delete(int id)
         {
             using (IDal dal = new Dal()) {
@@ -122,7 +119,7 @@ namespace GymXpress.Controllers
         }
 
         // POST: Compte/Delete/5
-        [HttpPost, AuthorizationConnectionFilter]
+        [HttpPost, AuthorizationConnectionFilter, AutorisationAdminFilter]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
