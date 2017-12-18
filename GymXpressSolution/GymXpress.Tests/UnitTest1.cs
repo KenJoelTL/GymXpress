@@ -1,12 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GymXpress.Controllers;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
-namespace GymXpress.Tests
-{
+namespace GymXpress.Tests {
     [TestClass]
     public class UnitTest1
     {

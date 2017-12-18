@@ -40,7 +40,7 @@ namespace GymXpress.Controllers {
         }
 
         // POST: Compte/Create
-        [HttpPost, AllowAnonymous]
+        [HttpPost]
         public ActionResult Create(Compte compte, string confirmationMotPasse)
         {
             try
@@ -139,7 +139,7 @@ namespace GymXpress.Controllers {
         }
         
         // GET: Login
-        [AllowAnonymous]
+
         public ActionResult Login()
         {
             if (HttpContext.Session[connecte] != null) {
@@ -148,7 +148,7 @@ namespace GymXpress.Controllers {
             return View();
         }
 
-        [HttpPost, AllowAnonymous]
+        [HttpPost]
         public ActionResult Login(string courriel, string motPasse)
         {
             try
