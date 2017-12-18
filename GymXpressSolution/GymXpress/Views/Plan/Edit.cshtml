@@ -1,42 +1,35 @@
 ﻿@model GymXpress.Models.Plan
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>View</h2>
 
-
-@using (Html.BeginForm())
-{
+@using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Plan</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        @Html.EditorFor(model => model.IdPlan, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+        
         <div class="form-group">
-            @Html.LabelFor(model => model.IdPlan, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="CourrielEntraineur">Courriel de l'entraineur</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IdPlan, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdPlan, "", new { @class = "text-danger" })
+                <input class="form-control" type="email" name="CourrielEntraineur" id="CourrielEntraineur" value="@Model.Entraineur.Courriel" />
+                @Html.ValidationMessageFor(model => model.Entraineur.Courriel, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IdCompte, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="CourrielUtilisateur">Courriel de l'utilisateur</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IdCompte, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdCompte, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdEntraineur, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdEntraineur, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdEntraineur, "", new { @class = "text-danger" })
+                <input class="form-control" type="email" name="CourrielUtilisateur" id="CourrielUtilisateur" value="@Model.Utilisateur.Courriel" />
+                @Html.ValidationMessageFor(model => model.Utilisateur.Courriel, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -51,11 +44,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <textarea class="form-control" rows="5" id="Description" name="Description"></textarea>
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -67,7 +60,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

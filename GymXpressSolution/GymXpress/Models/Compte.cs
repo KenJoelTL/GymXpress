@@ -9,6 +9,10 @@ namespace GymXpress.Models
 {
     public class Compte
     {
+        public const int UTILISATEUR = 0;
+        public const int ENTRAINEUR = 1;
+        public const int ADMIN = 2; 
+
         private int idCompte;
         private int role;
         private string courriel;

@@ -22,12 +22,12 @@ namespace GymXpress.Models.DAO {
             try {
                 MySqlCommand cmd = new MySqlCommand(stm, cnx);
                 rdr = cmd.ExecuteReader();
-                IDal dal = new Dal();
+                //IDal dal = new Dal();
                 while (rdr.Read()) {
                     plansListe.Add(new Plan() {
                         IdPlan = rdr.GetInt32(0),
                         IdCompte = rdr.GetInt32(1),
-                        Entraineur = dal.ObtenirTousLesComptes().SingleOrDefault(c => c.IdCompte == rdr.GetInt32(2)),
+                        IdEntraineur = rdr.GetInt32(2),
                         Nom = rdr.GetString(3),
                         Description = rdr.GetString(4),
                     });
@@ -81,9 +81,10 @@ namespace GymXpress.Models.DAO {
                 cmd.Parameters.AddWithValue("@IdPlan", plan.IdPlan);
 
                 cmd.ExecuteNonQuery();
-
+                /*
                 CompteDAO compteDAO = new CompteDAO(cnx);
                 compteDAO.Update(plan.Entraineur);
+                */
             }
             catch (MySqlException ex) {
                 Console.WriteLine("Error: {0}", ex.ToString());
