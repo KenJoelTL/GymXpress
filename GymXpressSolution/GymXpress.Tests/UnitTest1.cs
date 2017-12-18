@@ -23,6 +23,12 @@ namespace GymXpress.Tests {
             Assert.AreEqual("Index", result.);*/
         }
 
+        [TestMethod]
+        public void TestRenvoieVueLorsqueNon() {
+            PlanController planController = new PlanController();
+            var result = planController.Index() as ViewResult;
+            Assert.AreEqual("Index", result.ViewName);
+        }
 
     }
 }
