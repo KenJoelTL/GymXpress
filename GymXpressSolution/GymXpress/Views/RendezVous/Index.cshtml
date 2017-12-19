@@ -41,19 +41,19 @@
         <td>
             @Html.DisplayFor(modelItem => item.IdDispo)
         </td>
-        <td>
+ 
             @if (role > 0)
             {
-                @Html.DisplayFor(modelItem => item.Client.Prenom) @Html.DisplayFor(modelItem => item.Client.Nom)
+              <td>  @item.Client.Prenom @item.Client.Nom)</td>
 
             }
             else
              {
-                @Html.DisplayFor(modelItem => item.Entraineur.Prenom) @Html.DisplayFor(modelItem => item.Entraineur.Nom)
+                 <td>@item.Entraineur.Prenom  @item.Entraineur.Nom</td>
             }
             
         
-        </td>
+      
 
 
         <td>
