@@ -16,22 +16,33 @@ namespace GymXpress.Controllers
             var id = (int)HttpContext.Session["connecte"];
             var role = (int)HttpContext.Session["role"];
             List<RendezVous> listeDesRDV;
+            using (IDal dal = new Dal())
+            {
+                if (role > 0)
+                {
 
-            if (role > 0) {
-                using (IDal dal = new Dal()) {
-                    listeDesRDV = new List<RendezVous>( dal.ObtenirTousLesRDV().Where(rdv => rdv.IdEntraineur == id)) ;
+                    listeDesRDV = new List<RendezVous>(dal.ObtenirTousLesRDV().Where(rdv => rdv.IdEntraineur == id));
+                }
+
+                else
+                {
+                    
+                    listeDesRDV = new List<RendezVous>(dal.ObtenirTousLesRDV().Where(rdv => rdv.IdClient == id));
                     
                 }
-            }
-            else
-            {
-                using (IDal dal = new Dal())
-                {
-                    listeDesRDV = new List<RendezVous>(dal.ObtenirTousLesRDV().Where(rdv => rdv.IdClient == id));
 
+                foreach (RendezVous item in listeDesRDV)
+                {
+                    item.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == item.IdEntraineur);
+                    item.Client = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == item.IdClient);
                 }
             }
             return View(listeDesRDV);
+
+  
+
+
+
         }
 
         // GET: RendezVous/Details/5

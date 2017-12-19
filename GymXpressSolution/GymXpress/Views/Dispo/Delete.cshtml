@@ -1,0 +1,64 @@
+﻿@model GymXpress.Models.Dispo
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Supression</h2>
+
+<h3>Êtes-vous sûr de vouloir supprimer cette disponibilité?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt hidden>
+            @Html.DisplayNameFor(model => model.IdDispo)
+        </dt>
+
+        <dd hidden>
+            @Html.DisplayFor(model => model.IdDispo)
+        </dd>
+
+        <dt hidden>
+            @Html.DisplayNameFor(model => model.IdEntraineur)
+        </dt>
+
+        <dd hidden>
+            @Html.DisplayFor(model => model.IdEntraineur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HeureDebut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HeureDebut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HeureFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HeureFin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Retour aux disponibilités", "Index")
+        </div>
+    }
+</div>

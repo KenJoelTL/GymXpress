@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var role = (int)@Session["role"];
 }
 
 <h2>Liste de vos rendez-vous</h2>
@@ -16,12 +17,18 @@
         <th>
             @Html.DisplayNameFor(model => model.IdDispo)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdClient)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdEntraineur)
-        </th>
+
+            @if (role > 0)
+            {
+            <th>Client</th>
+            }
+            else
+            {
+                <th>Entraineur</th>
+            }
+            
+   
+
 
         <th></th>
     </tr>
@@ -35,11 +42,19 @@
             @Html.DisplayFor(modelItem => item.IdDispo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IdClient)
+            @if (role > 0)
+            {
+                @Html.DisplayFor(modelItem => item.Client.Prenom) @Html.DisplayFor(modelItem => item.Client.Nom)
+
+            }
+            else
+             {
+                @Html.DisplayFor(modelItem => item.Entraineur.Prenom) @Html.DisplayFor(modelItem => item.Entraineur.Nom)
+            }
+            
+        
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdEntraineur)
-        </td>
+
 
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.IdRDV }) |
