@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GymXpress.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GymXpress.Tests
 {
@@ -18,7 +19,8 @@ namespace GymXpress.Tests
                 List<Compte> compte = dal.ObtenirTousLesComptes();
                 Assert.IsNotNull(compte);
                 Assert.AreEqual(2, compte.Count);
-                Assert.AreEqual("test@mail.com", compte[1].Courriel);
+                var compte2 = dal.ObtenirTousLesComptes().LastOrDefault();
+                Assert.AreEqual("test@mail.com", compte2.Courriel);
             }
         }
 
@@ -44,8 +46,9 @@ namespace GymXpress.Tests
                 dal.CreerDispo(1, "heureDebutTest", "heureFinTest", "dateTest");
                 List<Dispo> dispo = dal.ObtenirToutesLesDispos();
                 Assert.IsNotNull(dispo);
-                Assert.AreEqual(1, dispo.Count);
-                Assert.AreEqual("heureDebutTest", dispo[0].HeureDebut);
+               // Assert.AreEqual(1, dispo.Count);
+                var dispo2 = dal.ObtenirToutesLesDispos().OrderBy(d=>d.IdDispo).LastOrDefault();
+                Assert.AreEqual("heureDebutTest", dispo2.HeureDebut);
             }
         }
 
@@ -72,8 +75,11 @@ namespace GymXpress.Tests
                 dal.CreerRDV(1, 1, 1);
                 List<RendezVous> rdv = dal.ObtenirTousLesRDV();
                 Assert.IsNotNull(rdv);
-                Assert.AreEqual(1, rdv.Count);
-                Assert.AreEqual(1, rdv[0].IdDispo);
+                //Assert.AreEqual(1, rdv.Count);
+                var rdv2 = dal.ObtenirTousLesRDV().OrderBy(r => r.IdRDV).LastOrDefault();
+                Assert.AreEqual(1, rdv2.IdDispo);
+                Assert.AreEqual(1, rdv2.IdEntraineur);
+                Assert.AreEqual(1, rdv2.IdClient);
             }
         }
 
@@ -85,8 +91,12 @@ namespace GymXpress.Tests
                 dal.CreerPlan(1, 1, "plan1", "description");
                 List<Plan> plan = dal.ObtenirTousLesPlans();
                 Assert.IsNotNull(plan);
-                Assert.AreEqual(1, plan.Count);
-                Assert.AreEqual("description", plan[0].Description);
+               // Assert.AreEqual(1, plan.Count);
+                var plan2 = dal.ObtenirTousLesPlans().OrderBy(p => p.IdPlan).LastOrDefault();
+                Assert.AreEqual("description", plan2.Description);
+                Assert.AreEqual("plan1", plan2.Nom);
+                Assert.AreEqual(1, plan2.IdEntraineur);
+                Assert.AreEqual(1, plan2.IdCompte);
             }
         }
 
