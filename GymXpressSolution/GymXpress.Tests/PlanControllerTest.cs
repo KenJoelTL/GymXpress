@@ -44,15 +44,27 @@ namespace GymXpress.Tests {
             var result3 = planController.Edit(param) as RedirectToRouteResult;
             Assert.AreEqual("Index", result3.RouteValues["action"]);
         }
-        /*
+        
         [TestMethod]
         public void EditPostTest() {
-            Plan param = new Plan();
-            var result = planController.Edit(param) as ViewResult;
-            Assert.IsNull(result);
-            var result2 = planController.Edit(param) as RedirectToRouteResult;
-            Assert.AreEqual("Index", result2.RouteValues["action"]);
-        }*/
+            var param = 1;
+            var form = new FormCollection();
+            using (Dal dal = new Dal()) {
+                Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == param);
+                plan.Client = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == plan.IdCompte);
+                plan.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == plan.IdEntraineur);
+                form["CourrielClient"] = plan.Client.Courriel;
+                form["CourrielEntraineur"] = plan.Entraineur.Courriel;
+                form["Nom"] = plan.Nom;
+                form["Description"] = plan.Description;
+                var result = planController.Edit(plan.IdPlan,form) as RedirectToRouteResult;
+                Assert.AreEqual("Index", result.RouteValues["action"]);
+            }
+            param = -150;
+            var result3 = planController.Edit(param,form) as ViewResult;
+            Assert.AreEqual("_Error", result3.ViewName);
+
+        }
 
         [TestMethod]
         public void DeleteTest() {
@@ -69,6 +81,23 @@ namespace GymXpress.Tests {
             Assert.AreEqual("Index", result3.RouteValues["action"]);
         }
 
+        [TestMethod]
+        public void DeletePostTest() {
+            var form = new FormCollection();
+            var param = 0;
+            using (Dal dal = new Dal()) {
+                dal.CreerPlan(1,1,"Plan de Test", "Pour la suppression");
+                Plan plan = dal.ObtenirTousLesPlans().LastOrDefault();
+
+                param = plan.IdPlan;
+                var result = planController.Delete(param, form) as RedirectToRouteResult;
+                Assert.AreEqual("Index", result.RouteValues["action"]);
+            }
+
+            param = -150;
+            var result2 = planController.Delete(param, form) as ViewResult;
+            Assert.AreEqual("_Error", result2.ViewName);
+        }
 
         /*
         [TestMethod]

@@ -99,7 +99,7 @@ namespace GymXpress.Controllers {
                 {
                     Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
                     Compte entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == Convert.ToString(collection["CourrielEntraineur"]));
-                    Compte client = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == Convert.ToString(collection["CourrielUtilisateur"]));
+                    Compte client = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == Convert.ToString(collection["CourrielClient"]));
                     if (plan == null)
                         return View("_Error");
                     else if (entraineur == null || client == null)
@@ -142,11 +142,12 @@ namespace GymXpress.Controllers {
                 using (IDal dal = new Dal())
                 {
                     Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
-                    if (plan != null)
+                    if (plan != null) {
                         dal.SupprimerPlan(plan.IdPlan);
+                        return RedirectToAction("Index");
+                    }
                     else
-                        View("_Erreur");
-                    return RedirectToAction("Index");
+                        return View("_Error");
                 }
             }
             catch
