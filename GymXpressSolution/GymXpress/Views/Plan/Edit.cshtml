@@ -26,9 +26,9 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="CourrielUtilisateur">Courriel du client</label>
+            <label class="control-label col-md-2" for="CourrielClient">Courriel du client</label>
             <div class="col-md-10">
-                <input class="form-control" type="email" name="CourrielUtilisateur" id="CourrielUtilisateur" value="@Model.Client.Courriel" />
+                <input class="form-control" type="email" name="CourrielClient" id="CourrielClient" value="@Model.Client.Courriel" />
                 @Html.ValidationMessageFor(model => model.Client.Courriel, "", new { @class = "text-danger" })
             </div>
         </div>
