@@ -11,10 +11,10 @@
 
 <table class="table">
     <tr>
-        <th>
+        <th hidden>
             @Html.DisplayNameFor(model => model.IdRDV)
         </th>
-        <th>
+        <th hidden>
             @Html.DisplayNameFor(model => model.IdDispo)
         </th>
 
@@ -26,7 +26,15 @@
             {
                 <th>Entraineur</th>
             }
-            
+        <th>
+            @Html.DisplayNameFor(model => model.Dispo.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dispo.HeureDebut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dispo.HeureFin)
+        </th>    
    
 
 
@@ -35,31 +43,38 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td hidden>
             @Html.DisplayFor(modelItem => item.IdRDV)
         </td>
-        <td>
+        <td hidden>
             @Html.DisplayFor(modelItem => item.IdDispo)
         </td>
  
             @if (role > 0)
             {
-              <td>  @item.Client.Prenom @item.Client.Nom)</td>
+              <td>  @item.Client.Prenom @item.Client.Nom</td>
 
             }
             else
              {
                  <td>@item.Entraineur.Prenom  @item.Entraineur.Nom</td>
             }
+        <td>
+            @Html.DisplayFor(modelItem => item.Dispo.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dispo.HeureDebut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dispo.HeureFin)
+        </td>
             
         
       
 
 
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdRDV }) |
-            @Html.ActionLink("Details", "Details", new { id = item.IdRDV }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.IdRDV })
+            @Html.ActionLink("Supprimer", "Delete", new { id = item.IdRDV })
         </td>
     </tr>
 }

@@ -13,6 +13,7 @@ namespace GymXpress.Models
         private int idEntraineur;
         public Compte Entraineur { get; set; }
         public Compte Client { get; set; }
+        public Dispo Dispo { get; set; }
 
         public int IdEntraineur
         {

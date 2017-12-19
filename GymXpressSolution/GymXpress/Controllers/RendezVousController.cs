@@ -35,6 +35,7 @@ namespace GymXpress.Controllers
                 {
                     item.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == item.IdEntraineur);
                     item.Client = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == item.IdClient);
+                    item.Dispo = dal.ObtenirToutesLesDispos().FirstOrDefault(d => d.IdDispo == item.IdDispo);
                 }
             }
             return View(listeDesRDV);
@@ -118,7 +119,15 @@ namespace GymXpress.Controllers
         // GET: RendezVous/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+
+            using (IDal dal = new Dal())
+            {
+                RendezVous rdv = dal.ObtenirTousLesRDV().SingleOrDefault(r => r.IdRDV== id);
+                rdv.Dispo = dal.ObtenirToutesLesDispos().FirstOrDefault(d => d.IdDispo == rdv.IdDispo);
+             
+
+                return View(rdv);
+            }
         }
 
         // POST: RendezVous/Delete/5
