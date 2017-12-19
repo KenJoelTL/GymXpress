@@ -23,7 +23,9 @@ namespace GymXpress.Tests {
 
         [TestMethod]
         public void CreationPostTest() {
-            Plan plan = new Plan() { Nom = "Plan de test", IdEntraineur = 1, Description = "Ceci est un plan de test", IdCompte = 1 };
+            Plan plan = new Plan() { Nom = "Plan de test", Entraineur = new Compte(), Client = new Compte(), Description = "Ceci est un plan de test" };
+            plan.Entraineur.Courriel = "admin@mail.com";
+            plan.Client.Courriel = "admin@mail.com";
             var result = planController.Create(plan) as RedirectToRouteResult;
             Assert.AreEqual("Index", result.RouteValues["action"]);
         }
