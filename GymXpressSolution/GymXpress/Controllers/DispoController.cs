@@ -87,7 +87,12 @@ namespace GymXpress.Controllers
         // GET: Dispo/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            using (IDal dal = new Dal())
+            {
+                Dispo dispo = dal.ObtenirToutesLesDispos().SingleOrDefault(d => d.IdDispo == id);
+                    
+            return View(dispo);
+            }
         }
 
         // POST: Dispo/Delete/5
@@ -116,7 +121,11 @@ namespace GymXpress.Controllers
         {
             using (IDal dal = new Dal())
             {
-                List<Dispo> listeDispo = new List<Dispo>(dal.ObtenirToutesLesDispos().Where(d => d.Date == date).Where(d => d.IdEntraineur == Id));
+                List<Dispo> listeDispo = new List<Dispo>(dal.ObtenirToutesLesDispos().Where(d => d.Date == date).Where(d => d.IdEntraineur == Id).OrderBy(d => d.HeureDebut));
+                foreach (Dispo item in listeDispo)
+                {
+                    item.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(d => d.IdCompte == item.IdEntraineur);
+                }
                 return Json(listeDispo);
             }
         }
@@ -124,7 +133,11 @@ namespace GymXpress.Controllers
         {
             using (IDal dal = new Dal())
             {
-                List<Dispo> listeDispo = new List<Dispo>(dal.ObtenirToutesLesDispos().Where(d => d.Date == date));
+                List<Dispo> listeDispo = new List<Dispo>(dal.ObtenirToutesLesDispos().Where(d => d.Date == date).OrderBy(d => d.HeureDebut));
+                foreach (Dispo item in listeDispo)
+                {
+                    item.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(d => d.IdCompte == item.IdEntraineur);
+                }
                 return Json(listeDispo);
             }
         }

@@ -57,11 +57,14 @@ else
     <input type="date" id="datePicker" onchange="afficherDispoPourClient(@Session["connecte"])">
     <table class="table" id="liste">
         <tr>
-            <th>
+            <th hidden>
                 @Html.DisplayNameFor(model => model.IdDispo)
             </th>
-            <th>
+            <th hidden>
                 @Html.DisplayNameFor(model => model.IdEntraineur)
+            </th>
+            <th>
+                Entraineur
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.HeureDebut)
@@ -93,14 +96,17 @@ else
             datatype: "json",
             success: function (Dispo) {
                 var listeParDate = "<tr>";
-                listeParDate += "<th>";
+                listeParDate += "<th hidden>";
                 listeParDate += "Id dispo";
                 listeParDate += "</th>";
-                listeParDate += "<th>";
+                listeParDate += "<th hidden>";
                 listeParDate += "Id entraineur";
                 listeParDate += "</th>";
                 listeParDate += "<th>";
-                listeParDate += "Id Heure début";
+                listeParDate += "Entraineur";
+                listeParDate += "</th>";
+                listeParDate += "<th>";
+                listeParDate += "Heure début";
                 listeParDate += "</th>";
                 listeParDate += "<th>";
                 listeParDate += "Heure fin";
@@ -113,11 +119,14 @@ else
                 listeParDate += "</tr>";
                 for (i = 0; i < Object.keys(Dispo).length; i++) {
                     listeParDate += "<tr>";
-                    listeParDate += "<td>";
+                    listeParDate += "<td hidden>";
                     listeParDate += Dispo[i].IdDispo;
                     listeParDate += "</td>";
-                    listeParDate += "<td>";
+                    listeParDate += "<td hidden>";
                     listeParDate += Dispo[i].IdEntraineur;
+                    listeParDate += "</td>";
+                    listeParDate += "<td>";
+                    listeParDate += Dispo[i].Entraineur.Prenom + " " + Dispo[i].Entraineur.Nom;
                     listeParDate += "</td>";
                     listeParDate += "<td>";
                     listeParDate += Dispo[i].HeureDebut;
@@ -129,8 +138,8 @@ else
                     listeParDate += Dispo[i].Date;
                     listeParDate += "</td>";
                     listeParDate += "<td>";
-                    listeParDate += "<a href='Edit/" + Dispo[i].IdDispo + "'>Edit | </a>";
-                    listeParDate += "<a href='Delete/" + Dispo[i].IdDispo + "'>Delete</a>";
+                    listeParDate += "<a href='Dispo/Edit/" + Dispo[i].IdDispo + "'>Edit | </a>";
+                    listeParDate += "<a href='Dispo/Delete/" + Dispo[i].IdDispo + "'>Delete</a>";
                     listeParDate += "</td>";
                     listeParDate += "<tr>";
                 }
@@ -148,14 +157,17 @@ else
             datatype: "json",
             success: function (Dispo) {
                 var listeParDate = "<tr>";
-                listeParDate += "<th>";
+                listeParDate += "<th hidden>";
                 listeParDate += "Id dispo";
                 listeParDate += "</th>";
-                listeParDate += "<th>";
+                listeParDate += "<th hidden>";
                 listeParDate += "Id entraineur";
                 listeParDate += "</th>";
                 listeParDate += "<th>";
-                listeParDate += "Id Heure début";
+                listeParDate += "Entraineur";
+                listeParDate += "</th>";
+                listeParDate += "<th>";
+                listeParDate += "Heure début";
                 listeParDate += "</th>";
                 listeParDate += "<th>";
                 listeParDate += "Heure fin";
@@ -168,11 +180,14 @@ else
                 listeParDate += "</tr>";
                 for (i = 0; i < Object.keys(Dispo).length; i++) {
                     listeParDate += "<tr>";
-                    listeParDate += "<td>";
+                    listeParDate += "<td hidden>";
                     listeParDate += Dispo[i].IdDispo;
                     listeParDate += "</td>";
-                    listeParDate += "<td>";
+                    listeParDate += "<td hidden>";
                     listeParDate += Dispo[i].IdEntraineur;
+                    listeParDate += "</td>";
+                    listeParDate += "<td>";
+                    listeParDate += Dispo[i].Entraineur.Prenom + " " + Dispo[i].Entraineur.Nom;
                     listeParDate += "</td>";
                     listeParDate += "<td>";
                     listeParDate += Dispo[i].HeureDebut;
