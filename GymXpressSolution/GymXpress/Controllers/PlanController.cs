@@ -9,8 +9,7 @@ namespace GymXpress.Controllers {
     [HandleError, AuthorizationConnectionFilter]
     public class PlanController : Controller {
         // GET: Plan
-        public ActionResult Index()
-        {
+        public ActionResult Index() {
             using (IDal dal = new Dal()) {
                 IEnumerable<Plan> listeDesPlans;
                 int role = (int)Session["role"];
@@ -26,31 +25,31 @@ namespace GymXpress.Controllers {
                         break;
                 }
                 foreach (Plan item in listeDesPlans) {
-                    item.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == item.IdEntraineur); 
+                    item.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == item.IdEntraineur);
                 }
 
                 return View(listeDesPlans);
             }
-            
-        }
 
+        }
+        /*
         // GET: Plan/Details/5
-        public ActionResult Details(int id)
-        {
+        public ActionResult Details(int id) {
             using (IDal dal = new Dal()) {
                 Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
-                plan.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == plan.IdEntraineur);
-                 
+
                 if (plan != null) {
+                    plan.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == plan.IdEntraineur);
                     return View(plan);
                 }
                 else {
                     return RedirectToAction("Index");
                 }
             }
-        }
+        }*/
 
         // GET: Plan/Create
+        [AutorisationEntraineurFilter]
         public ActionResult Create()
         {
             return View();
@@ -58,18 +57,14 @@ namespace GymXpress.Controllers {
 
         // POST: Plan/Create
         [HttpPost, AutorisationEntraineurFilter]
-        public ActionResult Create(Plan plan)
-        {
-            try
-            {
+        public ActionResult Create(Plan plan) {
+            try {
                 using (IDal dal = new Dal()) {
-
                     dal.CreerPlan(plan.IdCompte, plan.IdEntraineur, plan.Nom, plan.Description);
                     return RedirectToAction("Index");
                 }
             }
-            catch
-            {
+            catch {
                 return View();
             }
         }

@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GymXpress.Tests {
+namespace UnitTestProject1 {
     [TestClass]
-    public class UnitTest2 {
+    public class UnitTest1 {
         [TestMethod]
         public void TestMethod1() {
         }

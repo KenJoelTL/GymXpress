@@ -40,7 +40,7 @@ namespace GymXpress.Controllers {
         }
 
         // POST: Compte/Create
-        [HttpPost, AllowAnonymous]
+        [HttpPost]
         public ActionResult Create(Compte compte, string confirmationMotPasse)
         {
             try
@@ -50,9 +50,9 @@ namespace GymXpress.Controllers {
                 using (IDal dal = new Dal())
                 {
                     Compte cpt = dal.ObtenirTousLesComptes().SingleOrDefault(c => c.Courriel == compte.Courriel);
-                    if (compte == null) {
+                    if (cpt == null) {
                         dal.CreerCompte(compte.Role, compte.Courriel, compte.MotPasse, compte.Prenom, compte.Nom);
-                        if(HttpContext.Session[connecte] == null && HttpContext.Session[role] == null && (int)HttpContext.Session[role] < 2)
+                        if((HttpContext.Session[connecte] == null && HttpContext.Session[role] == null) || (int)HttpContext.Session[role] < Compte.ADMIN)
                             return RedirectToAction("Login");
                         else {
                             return RedirectToAction("Index");
@@ -65,7 +65,7 @@ namespace GymXpress.Controllers {
             }
             catch
             {
-                return View();
+                return View("_Error");
             }
         }
 
@@ -139,7 +139,7 @@ namespace GymXpress.Controllers {
         }
         
         // GET: Login
-        [AllowAnonymous]
+
         public ActionResult Login()
         {
             if (HttpContext.Session[connecte] != null) {
@@ -148,7 +148,7 @@ namespace GymXpress.Controllers {
             return View();
         }
 
-        [HttpPost, AllowAnonymous]
+        [HttpPost]
         public ActionResult Login(string courriel, string motPasse)
         {
             try
