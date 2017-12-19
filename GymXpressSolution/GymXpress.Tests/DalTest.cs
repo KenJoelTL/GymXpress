@@ -8,14 +8,6 @@ namespace GymXpress.Tests
     [TestClass]
     public class DalTest
     {
-        [TestInitialize]
-        public void Init_AvantChaqueTest()
-        {
-            using (Dal dal = new Dal())
-            {
-
-            }
-        }
 
         [TestMethod]
         public void CreerUnCompte()
@@ -25,8 +17,22 @@ namespace GymXpress.Tests
                 dal.CreerCompte(3, "test@mail.com", "mdp", "testPrenom", "testNom");
                 List<Compte> compte = dal.ObtenirTousLesComptes();
                 Assert.IsNotNull(compte);
-                Assert.AreEqual(1, compte.Count);
-                Assert.AreEqual("test@mail.com", compte[0].Courriel);
+                Assert.AreEqual(2, compte.Count);
+                Assert.AreEqual("test@mail.com", compte[1].Courriel);
+            }
+        }
+
+        [TestMethod]
+        public void ModifierCompte()
+        {
+            using (Dal dal = new Dal())
+            {
+
+                dal.ModifierCompte(2, 3, "test2@mail.com", "mdp", "testPrenom", "testNom");
+                List<Compte> compte = dal.ObtenirTousLesComptes();
+                Assert.IsNotNull(compte);
+                Assert.AreEqual(2, compte.Count);
+                Assert.AreEqual("test2@mail.com", compte[1].Courriel);
             }
         }
 
@@ -58,6 +64,46 @@ namespace GymXpress.Tests
             }
         }
 
-        
+        [TestMethod]
+        public void CreerUnRDV()
+        {
+            using (Dal dal = new Dal())
+            {
+                dal.CreerRDV(1, 1, 1);
+                List<RendezVous> rdv = dal.ObtenirTousLesRDV();
+                Assert.IsNotNull(rdv);
+                Assert.AreEqual(1, rdv.Count);
+                Assert.AreEqual(1, rdv[0].IdDispo);
+            }
+        }
+
+        [TestMethod]
+        public void CreerUnPlan()
+        {
+            using (Dal dal = new Dal())
+            {
+                dal.CreerPlan(1, 1, "plan1", "description");
+                List<Plan> plan = dal.ObtenirTousLesPlans();
+                Assert.IsNotNull(plan);
+                Assert.AreEqual(1, plan.Count);
+                Assert.AreEqual("description", plan[0].Description);
+            }
+        }
+
+        [TestMethod]
+        public void ModifierPlan()
+        {
+            using (Dal dal = new Dal())
+            {
+
+                dal.ModifierPlan(1, 1, 1, "planTEST", "description");
+                List<Plan> plan = dal.ObtenirTousLesPlans();
+                Assert.IsNotNull(plan);
+                Assert.AreEqual(1, plan.Count);
+                Assert.AreEqual("planTEST", plan[0].Nom);
+            }
+        }
+
+
     }
 }
