@@ -60,7 +60,9 @@ namespace GymXpress.Controllers {
         public ActionResult Create(Plan plan) {
             try {
                 using (IDal dal = new Dal()) {
-                    dal.CreerPlan(plan.IdCompte, plan.IdEntraineur, plan.Nom, plan.Description);
+                    plan.Client = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == plan.Client.Courriel);
+                    plan.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == plan.Entraineur.Courriel);                 
+                    dal.CreerPlan(plan.Client.IdCompte, plan.Entraineur.IdCompte, plan.Nom, plan.Description);
                     return RedirectToAction("Index");
                 }
             }
