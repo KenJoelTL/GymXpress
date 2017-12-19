@@ -59,7 +59,7 @@ namespace GymXpress.Controllers
                 {
                     Dispo dispo = dal.ObtenirToutesLesDispos().FirstOrDefault(d=>d.IdDispo== id.Value);
                     if (dispo == null)
-                        return View("Error");
+                        return View("_Error");
                     return View(dispo);
                 }
             }

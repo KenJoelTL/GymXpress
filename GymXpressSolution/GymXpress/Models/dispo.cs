@@ -48,7 +48,6 @@ namespace GymXpress.Models
             set { date = value; }
         }
 
-
-
+        public int IdCompte { get; set; }
     }
 }
