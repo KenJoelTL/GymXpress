@@ -38,7 +38,7 @@ namespace GymXpress.Tests {
                 var result2 = planController.Edit(plan.IdPlan) as ViewResult;
                 Assert.AreEqual(plan.IdPlan,((Plan)result2.Model).IdPlan);
             }
-            param = -1;
+            param = -150;
             var result3 = planController.Edit(param) as RedirectToRouteResult;
             Assert.AreEqual("Index", result3.RouteValues["action"]);
         }
@@ -50,8 +50,24 @@ namespace GymXpress.Tests {
             Assert.IsNull(result);
             var result2 = planController.Edit(param) as RedirectToRouteResult;
             Assert.AreEqual("Index", result2.RouteValues["action"]);
+        }*/
+
+        [TestMethod]
+        public void DeleteTest() {
+            var param = 1;
+            var result = planController.Delete(param) as ViewResult;
+            Assert.AreEqual("", result.ViewName);
+            using (Dal dal = new Dal()) {
+                Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault();
+                var result2 = planController.Delete(plan.IdPlan) as ViewResult;
+                Assert.AreEqual(plan.IdPlan, ((Plan)result2.Model).IdPlan);
+            }
+            param = -150;
+            var result3 = planController.Delete(param) as RedirectToRouteResult;
+            Assert.AreEqual("Index", result3.RouteValues["action"]);
         }
-        */
+
+
         /*
         [TestMethod]
         public void TestRenvoieVueLorsqueNon() {

@@ -14,7 +14,7 @@ namespace GymXpress.Models {
         private string nom;
         private string description;
         public Compte Entraineur { get; set; }
-        public Compte Utilisateur { get; set; }
+        public Compte Client { get; set; }
         
         public int IdPlan {
             get { return idPlan; }
