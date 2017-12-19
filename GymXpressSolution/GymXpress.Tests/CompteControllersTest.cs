@@ -103,6 +103,18 @@ namespace GymXpress.Tests {
         }
 
         [TestMethod]
+        public void DetailsTest() {
+            var param = -100;
+            var result = compteController.Edit(param) as ViewResult;
+            Assert.AreEqual("_Error", result.ViewName);
+
+            param = 1;
+            var result2 = compteController.Edit(param) as ViewResult;
+            Assert.AreEqual("", result2.ViewName);
+            Assert.AreEqual(1, ((Compte)result2.Model).IdCompte);
+        }
+
+        [TestMethod]
         public void EditTest() {
             var param = 1;
             var result = compteController.Edit(param) as ViewResult;
@@ -118,6 +130,41 @@ namespace GymXpress.Tests {
             Assert.AreEqual("Index", result2.RouteValues["action"]);
         }
 
+
+        [TestMethod]
+        public void DeleteTest() {
+            var param = 1;
+            var result = compteController.Delete(param) as ViewResult;
+            Assert.AreEqual("", result.ViewName);
+            using (Dal dal = new Dal()) {
+                Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault();
+                var result2 = compteController.Delete(compte.IdCompte) as ViewResult;
+                Assert.AreEqual(compte.IdCompte, ((Compte)result2.Model).IdCompte);
+            }
+            param = -150;
+            var result3 = compteController.Delete(param) as RedirectToRouteResult;
+            Assert.AreEqual("Index", result3.RouteValues["action"]);
+        }
+
+        [TestMethod]
+        public void DeletePostTest() {
+            var form = new FormCollection();
+            var param = 0;
+            using (Dal dal = new Dal()) {
+                dal.CreerCompte(0, "testdelete@mail.com", "delete", "Test", "Delete");
+                Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == "testdelete@mail.com");
+
+                param = compte.IdCompte;
+                var result = compteController.Delete(param,form) as RedirectToRouteResult;
+                Assert.AreEqual("Index", result.RouteValues["action"]);
+            }
+
+                param = -150;
+                var result2 = compteController.Delete(param,form) as ViewResult;
+                Assert.AreEqual("_Error", result2.ViewName);
+        }
+
+
         /*
         [TestMethod]
         public void TestConnection() {
@@ -130,6 +177,6 @@ namespace GymXpress.Tests {
             var result = compteController.Login() as ViewResult;
             Assert.AreEqual("Index", result.ViewName);
         }*/
-        
+
     }
 }

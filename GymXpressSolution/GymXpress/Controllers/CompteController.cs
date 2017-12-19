@@ -109,11 +109,11 @@ namespace GymXpress.Controllers {
 
                 Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == id);
                 if (compte != null) {
-                    dal.SupprimerCompte(compte.IdCompte);
+                    //dal.SupprimerCompte(compte.IdCompte);
                     return View(compte);
                 }
                 else
-                    return View("Index");
+                    return RedirectToAction("Index");
             }
 
         }
@@ -125,10 +125,15 @@ namespace GymXpress.Controllers {
             try
             {
                 // TODO: Add delete logic here
-                using (IDal dal = new Dal())
-                {
-                    dal.SupprimerCompte(id);
-                    return RedirectToAction("Index");
+                using (IDal dal = new Dal()) {
+                    Compte compte = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == id);
+
+                    if (compte != null) {
+                        dal.SupprimerCompte(id);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                        return View("_Error");
                 }
 
             }

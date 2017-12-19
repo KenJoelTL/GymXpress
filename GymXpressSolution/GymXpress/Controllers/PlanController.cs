@@ -76,7 +76,7 @@ namespace GymXpress.Controllers {
             using (IDal dal = new Dal()) {
                 Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
                 if (plan != null) {
-                    plan.Utilisateur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == plan.IdCompte);
+                    plan.Client = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == plan.IdCompte);
                     plan.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == plan.IdEntraineur);
                     ViewBag.Entraineurs = new SelectList(dal.ObtenirTousLesComptes().Where(c => c.Role == Compte.ENTRAINEUR),"IdCompte","Prenom");
                     return View(plan);
@@ -97,13 +97,13 @@ namespace GymXpress.Controllers {
                 {
                     Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
                     Compte entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == Convert.ToString(collection["CourrielEntraineur"]));
-                    Compte utilisateur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == Convert.ToString(collection["CourrielUtilisateur"]));
+                    Compte client = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.Courriel == Convert.ToString(collection["CourrielUtilisateur"]));
                     if (plan == null)
                         return View("_Error");
-                    else if (entraineur == null || utilisateur == null)
+                    else if (entraineur == null || client == null)
                         return View();
                     else {
-                        dal.ModifierPlan(id, utilisateur.IdCompte, entraineur.IdCompte, Convert.ToString(collection["Nom"]), Convert.ToString(collection["Description"]));
+                        dal.ModifierPlan(id, client.IdCompte, entraineur.IdCompte, Convert.ToString(collection["Nom"]), Convert.ToString(collection["Description"]));
                         return RedirectToAction("Index");
                     }
                 }
@@ -120,11 +120,9 @@ namespace GymXpress.Controllers {
         {
             using (IDal dal = new Dal()) {
                 Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
-                Compte utilisateur = dal.ObtenirTousLesComptes().FirstOrDefault(u => u.IdCompte == plan.IdCompte);
-                Compte entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(e => e.IdCompte == plan.IdEntraineur);
                 if (plan != null) {
-                    plan.Entraineur = entraineur;
-                    plan.Utilisateur = utilisateur;
+                    plan.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(e => e.IdCompte == plan.IdEntraineur);
+                    plan.Client = dal.ObtenirTousLesComptes().FirstOrDefault(u => u.IdCompte == plan.IdCompte);
                     return View(plan);
                 }
                 else {
