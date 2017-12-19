@@ -39,9 +39,9 @@ namespace GymXpress.Controllers {
         {
             using (IDal dal = new Dal()) {
                 Plan plan = dal.ObtenirTousLesPlans().FirstOrDefault(p => p.IdPlan == id);
-                plan.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == plan.IdEntraineur);
                  
                 if (plan != null) {
+                    plan.Entraineur = dal.ObtenirTousLesComptes().FirstOrDefault(c => c.IdCompte == plan.IdEntraineur);
                     return View(plan);
                 }
                 else {
@@ -63,7 +63,6 @@ namespace GymXpress.Controllers {
             try
             {
                 using (IDal dal = new Dal()) {
-
                     dal.CreerPlan(plan.IdCompte, plan.IdEntraineur, plan.Nom, plan.Description);
                     return RedirectToAction("Index");
                 }

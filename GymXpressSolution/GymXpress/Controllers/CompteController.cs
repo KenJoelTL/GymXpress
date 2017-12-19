@@ -65,7 +65,7 @@ namespace GymXpress.Controllers {
             }
             catch
             {
-                return View();
+                return View("_Error");
             }
         }
 
